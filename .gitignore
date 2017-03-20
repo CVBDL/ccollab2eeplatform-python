@@ -1,0 +1,6 @@
+__pycache__/
+.vs/
+ccollab2eeplatform-python.pyproj.user
+build/
+dist/
+ccollab2eeplatform.egg-info/

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83f0059b-cedb-4ba5-95f9-9692aa4d0ac6}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>ccollab2eeplatform\__main__.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>{139006e9-9026-4591-80ea-e4561d81e813}</InterpreterId>
+    <InterpreterVersion>3.5</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <Content Include="ccollab2eeplatform\ccollab\defects-report.csv" />
+    <Content Include="ccollab2eeplatform\ccollab\reviews-report.csv" />
+    <Content Include="LICENSE.txt" />
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ccollab2eeplatform\cli.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\ccollab\dateutil.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\ccollab\defect.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\ccollab\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\log.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\__main__.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ccollab2eeplatform" />
+    <Folder Include="ccollab2eeplatform\ccollab\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="C:\Python_64-bit_3.6_Virtual_Environment\">
+      <Id>{139006e9-9026-4591-80ea-e4561d81e813}</Id>
+      <BaseInterpreter>{3f783ee4-e164-4054-af7a-d050c3194209}</BaseInterpreter>
+      <Version>3.5</Version>
+      <Description>Python_64-bit_3.6_Virtual_Environment (Python 64-bit 3.6)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>
+      </PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
