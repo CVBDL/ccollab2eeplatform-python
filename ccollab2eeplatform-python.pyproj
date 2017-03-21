@@ -29,10 +29,13 @@
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ccollab2eeplatform\ccollab\review.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ccollab2eeplatform\cli.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ccollab2eeplatform\ccollab\dateutil.py">
+    <Compile Include="ccollab2eeplatform\dateutil.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\ccollab\defect.py">
@@ -48,6 +51,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\__main__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="setup.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

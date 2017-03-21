@@ -50,7 +50,7 @@ def _create_download_command(creation_date_lo, creation_date_hi):
     return command
 
 
-def download_csv(creation_date_lo, creation_date_hi):
+def fetch_defect_records(creation_date_lo, creation_date_hi):
     """Download defect CSV into a temp file."""
     command = _create_download_command(creation_date_lo, creation_date_hi)
     defect_records = []
@@ -59,18 +59,29 @@ def download_csv(creation_date_lo, creation_date_hi):
     # utf-8:     'ABC'
     # utf-8-sig: '\xef\xbb\xbfABC'
     #with tempfile.TemporaryFile(mode='w+', encoding='utf-8-sig') as temp_csv:
+    #    logger.info('Downloading defect CSV file ...')
     #    subprocess.run(command, shell=True, stdout=temp_csv)
+    #    logger.info('Downloading defect CSV file ... Done')
+    #    temp_csv.seek(0)
     #    defect_reader = csv.reader(temp_csv, delimiter=',')
-    #    for row in defect_reader:
-    #        print(row)
+    #    # skip header record
+    #    try:
+    #        next(defect_reader)
+    #    except StopIteration:
+    #        pass
+    #    else:
+    #        for record in defect_reader:
+    #            defect_records.append(record)
+
+    #return defect_records
 
     import os
     filepath = os.path.dirname(__file__) + './defects-report.csv'
     with open(filepath) as temp_csv:
         defect_reader = csv.reader(temp_csv, delimiter=',')
-        # Skip CSV header row
+        # skip header row
         next(defect_reader)
-        for row in defect_reader:
-            defect_records.append(row)
+        for record in defect_reader:
+            defect_records.append(record)
 
     return defect_records

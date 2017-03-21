@@ -1,9 +1,10 @@
 import argparse
 from datetime import date, timedelta
 
-from ccollab2eeplatform.log import logger
-from ccollab2eeplatform.ccollab import dateutil
+from ccollab2eeplatform import dateutil
+from ccollab2eeplatform.ccollab import review
 from ccollab2eeplatform.ccollab import defect
+from ccollab2eeplatform.log import logger
 
 
 def main():
@@ -56,12 +57,19 @@ def main():
     logger.info('Set review creation end date: "%s"' % review_end_date)
 
     # Download review data
-    defect_records = defect.download_csv(review_start_date, review_end_date)
-    for record in defect_records:
-        print(record)
+    review_records = review.fetch_review_records(review_start_date, review_end_date)
+    if len(review_records) == 0:
+        logger.warn('No review records.')
+    else:
+        for record in review_records:
+            print(record)
 
     # Download defect data
+    defect_records = defect.fetch_defect_records(review_start_date, review_end_date)
+    if len(defect_records) == 0:
+        logger.warn('No defect records.')
+    else:
+        for record in defect_records:
+            print(record)
 
-    # Namespace(end_date=None, start_date=None, task_id='abc')
-    print(review_start_date)
-    print(review_end_date)
+    print('=== END ===')
