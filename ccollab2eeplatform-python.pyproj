@@ -25,6 +25,9 @@
     <Content Include=".gitignore" />
     <Content Include="ccollab2eeplatform\ccollab\defects-report.csv" />
     <Content Include="ccollab2eeplatform\ccollab\reviews-report.csv" />
+    <Content Include="ccollab2eeplatform\ccollab\users.json">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="LICENSE.txt" />
     <Content Include="README.md" />
   </ItemGroup>
@@ -36,6 +39,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\ccollab\review_record.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\ccollab\users_settings.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\cli.py">
