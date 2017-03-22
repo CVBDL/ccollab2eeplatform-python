@@ -62,7 +62,7 @@ def main():
         logger.warn('No review records.')
     else:
         for record in review_records:
-            print(record)
+            print(record.creator)
 
     # Download defect data
     defect_records = defect.fetch_defect_records(review_start_date, review_end_date)
@@ -70,6 +70,6 @@ def main():
         logger.warn('No defect records.')
     else:
         for record in defect_records:
-            print(record)
+            pass
 
     print('=== END ===')

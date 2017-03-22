@@ -8,19 +8,7 @@ import urllib.parse
 from ccollab2eeplatform.log import logger
 
 
-__all__ = ('csv_column_index', 'download_csv')
-
-
-csv_column_index = {
-    'defect_id': 0,
-    'review_id': 1,
-    'review_creation_date': 2,
-    'creator_login': 3,
-    'creator_full_name': 4,
-    'severity': 5,
-    'type_cvb': 6,
-    'injection_stage': 7
-}
+__all__ = ('fetch_defect_records')
 
 
 def _create_download_command(creation_date_lo, creation_date_hi):

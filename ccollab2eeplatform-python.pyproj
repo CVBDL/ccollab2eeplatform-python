@@ -29,7 +29,13 @@
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ccollab2eeplatform\ccollab\record_field_index.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ccollab2eeplatform\ccollab\review.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\ccollab\review_record.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\cli.py">
@@ -42,6 +48,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\ccollab\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\filters\creator_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\filters\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\log.py">
@@ -60,6 +72,7 @@
   <ItemGroup>
     <Folder Include="ccollab2eeplatform" />
     <Folder Include="ccollab2eeplatform\ccollab\" />
+    <Folder Include="ccollab2eeplatform\filters\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="C:\Python_64-bit_3.6_Virtual_Environment\">
