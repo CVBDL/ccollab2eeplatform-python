@@ -1,6 +1,7 @@
 """Define a review record."""
 
 from ccollab2eeplatform.ccollab.record_field_index import review_field_index
+from ccollab2eeplatform.settings.users_settings import UsersSettings
 
 
 class ReviewRecord():
@@ -84,7 +85,7 @@ class ReviewRecord():
 
     @property
     def creator_product_name(self):
-        pass
+        return UsersSettings.get_product_by_login(self.creator_login)
 
     @property
     def review_creation_year(self):
@@ -94,9 +95,4 @@ class ReviewRecord():
     @property
     def review_creation_month(self):
         """Return a string for the month of review creation date"""
-        return (self.review_creation_date)[5:7]
-
-    @property
-    def review_creation_day(self):
-        """Return a string for the day of review creation date"""
-        return (self.review_creation_date)[8:10]
+        return (self.review_creation_date)[0:7]

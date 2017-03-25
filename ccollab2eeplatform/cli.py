@@ -5,6 +5,7 @@ from ccollab2eeplatform import dateutil
 from ccollab2eeplatform.ccollab import review
 from ccollab2eeplatform.ccollab import defect
 from ccollab2eeplatform.log import logger
+from ccollab2eeplatform.data_manager import DataManager
 
 
 def main():
@@ -60,16 +61,14 @@ def main():
     review_records = review.fetch_review_records(review_start_date, review_end_date)
     if len(review_records) == 0:
         logger.warn('No review records.')
-    else:
-        for record in review_records:
-            print(record.creator)
 
     # Download defect data
     defect_records = defect.fetch_defect_records(review_start_date, review_end_date)
     if len(defect_records) == 0:
         logger.warn('No defect records.')
-    else:
-        for record in defect_records:
-            pass
 
-    print('=== END ===')
+    data_manager = DataManager(review_records=review_records,
+                               defect_records=defect_records)
+    data_manager.process()
+
+    logger.info('Completed.')
