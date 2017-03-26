@@ -1,4 +1,7 @@
-"""Data manager module."""
+"""Data manager module.
+
+Collect data of each defined chart, and send it to EagleEye Platform.
+"""
 
 import json
 from eeplatform_api.client import EagleEyePlatformClient
@@ -13,7 +16,7 @@ from ccollab2eeplatform.statistics.review_records_statistics import (
 
 class DataManager:
     """Main data manager class.
-    
+
     Generate all review and defect related charts.
 
     Args:
@@ -32,13 +35,16 @@ class DataManager:
             self.review_statistics = ReviewRecordsStatistics(review_records)
 
     def process(self):
-        """The entry point of processing all of the charts."""
+        """The entry point of processing all of the charts.
+
+        It will call subprocesses to generate each chart.
+        """
         if self.review_records is not None:
             self._process_review_count_by_month()
 
     def _get_client(self):
-        """Get an EagleEye Platform client instance.
-        
+        """Get an EagleEye Platform API client instance.
+
         Returns:
             An instance of EagleEye Platform client.
         """

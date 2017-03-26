@@ -20,7 +20,7 @@ class ChartsSettings:
     @classmethod
     def get_settings(cls, key):
         """Return a chart's settings by a key.
-        
+
         Args:
             key (str): The key for finding settings.
         Returns:
@@ -31,7 +31,7 @@ class ChartsSettings:
     @classmethod
     def get_chart_id(cls, key):
         """Return chart's _id by a key.
-        
+
         Args:
             key (str): The key for finding settings.
         Returns:

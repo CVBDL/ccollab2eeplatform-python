@@ -20,7 +20,7 @@ class UsersSettings():
     @classmethod
     def list_login_names(cls):
         """Find and list all the login names.
-        
+
         Returns:
             A list of login names.
         """

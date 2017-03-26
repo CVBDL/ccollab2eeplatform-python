@@ -10,6 +10,7 @@ class ReviewRecord():
     Args:
         record: A string list contains some fields.
     """
+
     def __init__(self, record):
         self.record = record
 
@@ -20,7 +21,7 @@ class ReviewRecord():
     @property
     def review_creation_date(self):
         """A string of review creaion date.
-        
+
         Examples:
             "2017-01-09 15:59 UTC"
         """
@@ -71,10 +72,9 @@ class ReviewRecord():
         days_in_second = 0
         parts = self.total_person_time.split(',')
         time_parts = parts[-1].strip().split(':')
-        time_in_second = (
-            int(time_parts[0]) * 60 * 60
-            + int(time_parts[1]) * 60
-            + int(time_parts[2]))
+        time_in_second = (int(time_parts[0]) * 60 * 60
+                          + int(time_parts[1]) * 60
+                          + int(time_parts[2]))
 
         # Parse: "1d, 07:55:04".
         if len(parts) == 2:

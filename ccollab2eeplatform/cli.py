@@ -58,17 +58,22 @@ def main():
     logger.info('Set review creation end date: "%s"' % review_end_date)
 
     # Download review data
-    review_records = review.fetch_review_records(review_start_date, review_end_date)
+    review_records = review.fetch_review_records(review_start_date,
+                                                 review_end_date)
     if len(review_records) == 0:
         logger.warn('No review records.')
 
     # Download defect data
-    defect_records = defect.fetch_defect_records(review_start_date, review_end_date)
+    defect_records = defect.fetch_defect_records(review_start_date,
+                                                 review_end_date)
     if len(defect_records) == 0:
         logger.warn('No defect records.')
 
     data_manager = DataManager(review_records=review_records,
                                defect_records=defect_records)
+
+    # Start to process all the charts.
     data_manager.process()
 
     logger.info('Completed.')
+    return 0
