@@ -43,6 +43,9 @@
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ccollab2eeplatform\ccollab\defect_record.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ccollab2eeplatform\ccollab\record_field_index.py">
       <SubType>Code</SubType>
     </Compile>
@@ -87,6 +90,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\settings\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ccollab2eeplatform\statistics\defect_records_statistics.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\statistics\review_records_statistics.py">

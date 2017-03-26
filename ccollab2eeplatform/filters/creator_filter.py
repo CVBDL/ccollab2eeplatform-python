@@ -41,5 +41,5 @@ class CreatorFilter():
         if kws is None: return self.records
 
         result = [ record for record in self.records
-                  for kw in kws if record.creator == kw ]
+                  for kw in kws if record.creator_login == kw ]
         return result

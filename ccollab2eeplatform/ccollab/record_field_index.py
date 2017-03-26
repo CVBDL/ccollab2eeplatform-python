@@ -1,4 +1,4 @@
-"""Record indexes for CSV files."""
+"""Mapping of field name and its index in review/defect CSV file."""
 
 
 review_field_index = {

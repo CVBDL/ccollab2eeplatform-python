@@ -6,6 +6,7 @@ import tempfile
 import urllib.parse
 
 from ccollab2eeplatform.log import logger
+from ccollab2eeplatform.ccollab.defect_record import DefectRecord
 
 
 __all__ = ('fetch_defect_records')
@@ -70,6 +71,6 @@ def fetch_defect_records(creation_date_lo, creation_date_hi):
         # skip header row
         next(defect_reader)
         for record in defect_reader:
-            defect_records.append(record)
+            defect_records.append(DefectRecord(record))
 
     return defect_records

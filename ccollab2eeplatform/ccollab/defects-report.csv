@@ -1,6 +1,6 @@
 ???Defect ID,Review ID,Review Creation Date,Creator Login,Creator Full Name,Severity,Type_CVB,Injection Stage
 137268,85335,2016-11-10 14:50 UTC,pzhong,Petr Jon?í?í,Major,algorithm/logic,Code
-137264,88123,2017-01-05 07:49 UTC,rli,Wen Chinn Yew,Minor,N/A,N/A
+137264,88123,2017-01-05 07:49 UTC,rli1,Wen Chinn Yew,Minor,N/A,N/A
 137263,88123,2017-01-05 07:49 UTC,mmo2,Wen Chinn Yew,Minor,N/A,N/A
 137262,87892,2017-01-03 08:19 UTC,pzhong,Kerwen Zhang,Major,algorithm/logic,Code
 137258,88309,2017-01-09 01:59 UTC,mmo2,Anthony Zhu,Major,algorithm/logic,Code
@@ -9,13 +9,12 @@
 137215,87602,2016-12-21 22:05 UTC,pzhong,Chris Lardi,Minor,build,Code
 137214,87602,2016-12-21 22:05 UTC,pzhong,Chris Lardi,Minor,build,Code
 137213,88283,2017-01-06 20:54 UTC,trang,Mark Tutkowski,Major,documentation,Not Evaluated
-137212,88283,2017-01-06 20:54 UTC,rli,Mark Tutkowski,Major,documentation,Not Evaluated
+137212,88283,2017-01-06 20:54 UTC,rli1,Mark Tutkowski,Major,documentation,Not Evaluated
 137211,87602,2016-12-21 22:05 UTC,trang,Chris Lardi,Minor,style,Code
-137210,87602,2016-12-21 22:05 UTC,rli,Chris Lardi,Minor,build,Code
-137209,87602,2016-12-21 22:05 UTC,rli,Chris Lardi,Minor,documentation,Code
+137210,87602,2016-12-21 22:05 UTC,rli1,Chris Lardi,Minor,build,Code
+137209,87602,2016-12-21 22:05 UTC,rli1,Chris Lardi,Minor,documentation,Code
 137208,87602,2016-12-21 22:05 UTC,trang,Chris Lardi,Minor,build,Code
 137207,88283,2017-01-06 20:54 UTC,trang,Petar Vidosavljevic,Minor,documentation,Not Evaluated
-137206,88283,2017-01-06 20:54 UTC,rli,Mark Tutkowski,Major,algorithm/logic,Not Evaluated
+137206,88283,2017-01-06 20:54 UTC,rli1,Mark Tutkowski,Major,algorithm/logic,Not Evaluated
 137204,87938,2017-01-03 18:23 UTC,trang,Ray Husted,Major,requirements/design,High Level Design
 137202,88073,2017-01-04 18:17 UTC,rwschlaf,Bob Schlaf,Minor,documentation,Not Evaluated
-137200,88073,2017-01-04 18:17 UTC,rwschlaf,Bob Schlaf,Minor,documentation,Not Evaluated
