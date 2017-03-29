@@ -34,10 +34,10 @@ class DefectRecordsStatistics:
 
         creator_filter = CreatorFilter(self.records,
                                        UsersSettings.list_login_names())
+        keyfunc = lambda record: record.creator_product_name
         for key, group in groupby(
-                creator_filter.filter(),
-                lambda record: record.creator_product_name):
-
+                sorted(creator_filter.filter(), key=keyfunc),
+                keyfunc):
             data.append([key, sum(1 for _ in group)])
 
         return schema, data

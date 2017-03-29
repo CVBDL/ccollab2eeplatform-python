@@ -47,6 +47,7 @@ class DataManager:
         """
         if self.review_records is not None:
             self._process_review_count_by_month()
+            self._process_review_count_by_product()
         if self.defect_records is not None:
             self._process_defect_count_by_product()
 
@@ -74,9 +75,22 @@ class DataManager:
         client = self._get_client()
         #client.chart.update(chart_id, {'datatable': data_table_json_obj})
 
+    def _process_review_count_by_product(self):
+        """Review: generate review count by product."""
+        settings_key = 'review_count_by_product'
+        chart_id = ChartsSettings.get_chart_id(settings_key)
+        schema, data = (
+            self.review_statistics.calc_review_count_by_product()
+        )
+        data_table = gviz_api.DataTable(schema, data=data)
+        data_table_json_obj = json.loads(data_table.ToJSon().decode('utf-8'))
+        client = self._get_client()
+        #client.chart.update(chart_id, {'datatable': data_table_json_obj})
+        print(data_table_json_obj)
+
     def _process_defect_count_by_product(self):
         """Defect: generate defect count by product."""
-        settings_key = 'defect count by product'
+        settings_key = 'defect_count_by_product'
         chart_id = ChartsSettings.get_chart_id(settings_key)
         schema, data = (
             self.defect_statistics.calc_defect_count_by_product()
@@ -85,4 +99,3 @@ class DataManager:
         data_table_json_obj = json.loads(data_table.ToJSon().decode('utf-8'))
         client = self._get_client()
         #client.chart.update(chart_id, {'datatable': data_table_json_obj})
-        print(data_table_json_obj)

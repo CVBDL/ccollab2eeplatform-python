@@ -35,10 +35,34 @@ class ReviewRecordsStatistics:
 
         creator_filter = CreatorFilter(self.records,
                                        UsersSettings.list_login_names())
+        keyfunc = lambda record: record.review_creation_month
         for key, group in groupby(
-                creator_filter.filter(),
-                lambda record: record.review_creation_month):
+                sorted(creator_filter.filter(), key=keyfunc),
+                keyfunc):
+            data.append([key, sum(1 for _ in group)])
 
+        return schema, data
+
+    def calc_review_count_by_product(self):
+        """Review count by product.
+
+        Data table:
+        Product  Count
+        Team1    20
+        Team2    16
+
+        Returns:
+            A tuple of column definition and data.
+        """
+        schema = [('Product', 'string'), ('Count', 'number')]
+        data = []
+
+        creator_filter = CreatorFilter(self.records,
+                                       UsersSettings.list_login_names())
+        keyfunc = lambda record: record.creator_product_name
+        for key, group in groupby(
+                sorted(creator_filter.filter(), key=keyfunc),
+                keyfunc):
             data.append([key, sum(1 for _ in group)])
 
         return schema, data
