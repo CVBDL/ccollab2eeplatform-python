@@ -17,6 +17,22 @@ class DefectRecordsStatistics:
 
     def __init__(self, records):
         self.records = records
+        self._valid_records = None
+
+    def _get_valid_records(self):
+        """Return records which we should use to calculate statistics.
+
+        Only the record which creator login name is in users settings
+        file is considered to be valid.
+        """
+        if self._valid_records is None:
+            valid_creator_filter = CreatorFilter(
+                self.records,
+                UsersSettings.list_login_names()
+            )
+            self._valid_records = valid_creator_filter.filter()
+
+        return self._valid_records
 
     def calc_defect_count_by_product(self):
         """Defect count by product.
@@ -31,13 +47,10 @@ class DefectRecordsStatistics:
         """
         schema = [('Product', 'string'), ('Count', 'number')]
         data = []
-
-        creator_filter = CreatorFilter(self.records,
-                                       UsersSettings.list_login_names())
+        valid_records = self._get_valid_records()
         keyfunc = lambda record: record.creator_product_name
         for key, group in groupby(
-                sorted(creator_filter.filter(), key=keyfunc),
-                keyfunc):
+                sorted(valid_records, key=keyfunc), keyfunc):
             data.append([key, sum(1 for _ in group)])
 
         return schema, data

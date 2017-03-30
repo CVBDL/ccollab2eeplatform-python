@@ -10,6 +10,6 @@ setup(
     url='https://github.com/CVBDL/ccollab2eeplatform-python',
     author='Patrick Zhong',
     license='MIT',
-    packages=find_packages(exclude=['tests'])
+    packages=find_packages(exclude=['tests']),
     install_requires=['eagleeye-platform-api>=0.1']
 )
