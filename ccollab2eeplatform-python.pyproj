@@ -67,7 +67,7 @@
     <Compile Include="ccollab2eeplatform\cli.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ccollab2eeplatform\dateutil.py">
+    <Compile Include="ccollab2eeplatform\utils.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\ccollab\defect.py">
@@ -128,6 +128,27 @@
     <Compile Include="tests\ccollab\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\filters\test_creator_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\filters\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\settings\test_users_settings.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\settings\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\statistics\test_review_records_statistics.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\statistics\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_utils.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -142,6 +163,9 @@
     <Folder Include="ccollab2eeplatform\statistics\" />
     <Folder Include="tests\" />
     <Folder Include="tests\ccollab\" />
+    <Folder Include="tests\filters\" />
+    <Folder Include="tests\statistics\" />
+    <Folder Include="tests\settings\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="C:\Python_64-bit_3.6_Virtual_Environment\">

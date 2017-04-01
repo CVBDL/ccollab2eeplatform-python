@@ -2,6 +2,7 @@
 
 from itertools import groupby
 
+from ccollab2eeplatform import utils
 from ccollab2eeplatform.settings.users_settings import UsersSettings
 from ccollab2eeplatform.filters.creator_filter import CreatorFilter
 
@@ -37,23 +38,31 @@ class ReviewRecordsStatistics:
     def calc_review_count_by_month(self):
         """Review count by month.
 
+        Data table will contain continuous months in ASC order.
+
         Data table:
         Month    Count
         2016-01  20
-        2016-02  30
+        2016-02  0
         2016-03  25
 
         Returns:
             A tuple of column definition and data.
         """
-        schema = [('Month', 'string'), ('Count', 'number')]
-        data = []
-        valid_records = self._get_valid_records()
-        keyfunc = lambda record: record.review_creation_month
-        for key, group in groupby(
-                sorted(valid_records, key=keyfunc), keyfunc):
-            data.append([key, sum(1 for _ in group)])
+        def keyfunc(record):
+            return record.review_creation_month
 
+        schema = [('Month', 'string'), ('Count', 'number')]
+        records = self._get_valid_records()
+        sorted_records = sorted(records, key=keyfunc)
+        time_span = utils.month_range(
+            sorted_records[0].review_creation_month,
+            sorted_records[-1].review_creation_month
+        )
+        stat = {}
+        for key, group in groupby(sorted_records, keyfunc):
+            stat[key] = sum(1 for _ in group)
+        data = [ [month, stat.get(month, 0)] for month in sorted(time_span) ]
         return schema, data
 
     def calc_review_count_by_product(self):
@@ -67,12 +76,12 @@ class ReviewRecordsStatistics:
         Returns:
             A tuple of column definition and data.
         """
+        def keyfunc(record):
+            return record.review_creation_month
+
         schema = [('Product', 'string'), ('Count', 'number')]
         data = []
-        valid_records = self._get_valid_records()
-        keyfunc = lambda record: record.creator_product_name
-        for key, group in groupby(
-                sorted(valid_records, key=keyfunc), keyfunc):
+        records = self._get_valid_records()
+        for key, group in groupby(sorted(records, key=keyfunc), keyfunc):
             data.append([key, sum(1 for _ in group)])
-
         return schema, data

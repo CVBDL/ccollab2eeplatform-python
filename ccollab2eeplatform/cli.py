@@ -1,7 +1,7 @@
 import argparse
 from datetime import date, timedelta
 
-from ccollab2eeplatform import dateutil
+from ccollab2eeplatform import utils
 from ccollab2eeplatform.ccollab import review
 from ccollab2eeplatform.ccollab import defect
 from ccollab2eeplatform.log import logger
@@ -32,7 +32,7 @@ def main():
         review_end_date = date.today().isoformat()
     else:
         try:
-            review_end_date = dateutil.to_isoformat(args.end_date)
+            review_end_date = utils.to_isoformat(args.end_date)
         except Exception as e:
             logger.error('Error occurred parsing end date. Details: %s' % e)
             return 1
@@ -49,7 +49,7 @@ def main():
             return 1
     else:
         try:
-            review_start_date = dateutil.to_isoformat(args.start_date)
+            review_start_date = utils.to_isoformat(args.start_date)
         except Exception as e:
             logger.error('Error occurred parsing start date. Details: %s' % e)
             return 1
