@@ -113,6 +113,24 @@
     <Compile Include="setup.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\ccollab\test_defect.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\ccollab\test_defect_record.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\ccollab\test_review.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\ccollab\test_review_record.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\ccollab\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ccollab2eeplatform" />
@@ -122,6 +140,8 @@
     <Folder Include="ccollab2eeplatform\google_visualization\examples\" />
     <Folder Include="ccollab2eeplatform\settings\" />
     <Folder Include="ccollab2eeplatform\statistics\" />
+    <Folder Include="tests\" />
+    <Folder Include="tests\ccollab\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="C:\Python_64-bit_3.6_Virtual_Environment\">
