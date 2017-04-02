@@ -31,8 +31,11 @@ class DataManager:
         defect_records: A list of defect records.
     """
 
-    def __init__(self, review_records=None, defect_records=None):
+    def __init__(self, start_date, end_date,
+                 review_records=None, defect_records=None):
         self._client = None
+        self.start_date = start_date
+        self.end_date = end_date
         self.review_records = review_records
         self.defect_records = defect_records
         if review_records is not None:
@@ -40,10 +43,14 @@ class DataManager:
         if defect_records is not None:
             self.defect_statistics = DefectRecordsStatistics(defect_records)
 
-    def process(self):
+    def process(self, start_date, end_date):
         """The entry point of processing all of the charts.
 
         It will call subprocesses to generate each chart.
+
+        Args:
+            start_date (str): The start of time span for given records.
+            end_date (str): The end of time span for given records.
         """
         if self.review_records is not None:
             self._process_review_count_by_month()

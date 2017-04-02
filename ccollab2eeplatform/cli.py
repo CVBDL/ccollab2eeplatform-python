@@ -73,7 +73,7 @@ def main():
                                defect_records=defect_records)
 
     # Start to process all the charts.
-    data_manager.process()
+    data_manager.process(review_start_date, review_end_date)
 
     logger.info('Completed.')
     return 0
