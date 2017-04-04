@@ -41,9 +41,6 @@ class TestReviewRecord(unittest.TestCase):
     def test_creator_login(self):
         self.assertEqual('pzhong', self.record.creator_login)
 
-    def test_creator(self):
-        self.assertEqual('pzhong', self.record.creator)
-
     def test_creator_full_name(self):
         self.assertEqual('Patrick Zhong', self.record.creator_full_name)
 

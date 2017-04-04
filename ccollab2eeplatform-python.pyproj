@@ -67,6 +67,9 @@
     <Compile Include="ccollab2eeplatform\cli.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ccollab2eeplatform\statistics\records_statistics.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ccollab2eeplatform\utils.py">
       <SubType>Code</SubType>
     </Compile>
@@ -101,7 +104,7 @@
     <Compile Include="ccollab2eeplatform\statistics\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ccollab2eeplatform\data_manager.py">
+    <Compile Include="ccollab2eeplatform\manager.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\__init__.py">

@@ -20,6 +20,11 @@ class ReviewRecord():
         return self.record[review_field_index['id']]
 
     @property
+    def review_id(self):
+        """Alias: review id."""
+        return self.record[review_field_index['id']]
+
+    @property
     def review_creation_date(self):
         """A string of review creaion date.
 
@@ -29,12 +34,25 @@ class ReviewRecord():
         return self.record[review_field_index['review_creation_date']]
 
     @property
-    def creator_login(self):
-        """Creator login name."""
-        return self.record[review_field_index['creator_login']]
+    def review_creation_year(self):
+        """Year of review creation date.
+
+        Returns:
+            str: A year like "2017".
+        """
+        return (self.review_creation_date)[0:4]
 
     @property
-    def creator(self):
+    def review_creation_month(self):
+        """Month of review creation date.
+
+        Returns:
+            str: A month like "2017-01".
+        """
+        return (self.review_creation_date)[0:7]
+
+    @property
+    def creator_login(self):
         """Creator login name."""
         return self.record[review_field_index['creator_login']]
 
@@ -42,6 +60,15 @@ class ReviewRecord():
     def creator_full_name(self):
         """Creator full name."""
         return self.record[review_field_index['creator_full_name']]
+
+    @property
+    def creator_product_name(self):
+        """Creator product name.
+
+        Returns:
+            str: Product name like "ViewPoint".
+        """
+        return UsersSettings.get_product_by_login(self.creator_login)
 
     @property
     def defect_count(self):
@@ -93,30 +120,3 @@ class ReviewRecord():
             days_in_second = days * 24 * 60 * 60
 
         return days_in_second + time_in_second
-
-    @property
-    def creator_product_name(self):
-        """Creator product name.
-
-        Returns:
-            str: Product name like "ViewPoint".
-        """
-        return UsersSettings.get_product_by_login(self.creator_login)
-
-    @property
-    def review_creation_year(self):
-        """Year of review creation date.
-
-        Returns:
-            str: A year like "2017".
-        """
-        return (self.review_creation_date)[0:4]
-
-    @property
-    def review_creation_month(self):
-        """Month of review creation date.
-
-        Returns:
-            str: A month like "2017-01".
-        """
-        return (self.review_creation_date)[0:7]

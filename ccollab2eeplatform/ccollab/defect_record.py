@@ -34,40 +34,6 @@ class DefectRecord():
         return self.record[defect_field_index['review_creation_date']]
 
     @property
-    def creator_login(self):
-        """Creator login name."""
-        return self.record[defect_field_index['creator_login']]
-
-    @property
-    def creator_full_name(self):
-        """Creator full name."""
-        return self.record[defect_field_index['creator_full_name']]
-
-    @property
-    def severity(self):
-        """Severity."""
-        return self.record[defect_field_index['severity']]
-
-    @property
-    def type_cvb(self):
-        """Type CVB."""
-        return self.record[defect_field_index['type_cvb']]
-
-    @property
-    def injection_stage(self):
-        """Injection state."""
-        return self.record[defect_field_index['injection_stage']]
-
-    @property
-    def creator_product_name(self):
-        """Creator product name.
-
-        Returns:
-            str: Product name like "ViewPoint".
-        """
-        return UsersSettings.get_product_by_login(self.creator_login)
-
-    @property
     def review_creation_year(self):
         """Year of review creation date.
 
@@ -84,3 +50,38 @@ class DefectRecord():
             str: A month like "2017-01".
         """
         return (self.review_creation_date)[0:7]
+
+
+    @property
+    def creator_login(self):
+        """Creator login name."""
+        return self.record[defect_field_index['creator_login']]
+
+    @property
+    def creator_full_name(self):
+        """Creator full name."""
+        return self.record[defect_field_index['creator_full_name']]
+
+    @property
+    def creator_product_name(self):
+        """Creator product name.
+
+        Returns:
+            str: Product name like "ViewPoint".
+        """
+        return UsersSettings.get_product_by_login(self.creator_login)
+
+    @property
+    def severity(self):
+        """Severity."""
+        return self.record[defect_field_index['severity']]
+
+    @property
+    def type_cvb(self):
+        """Type CVB."""
+        return self.record[defect_field_index['type_cvb']]
+
+    @property
+    def injection_stage(self):
+        """Injection state."""
+        return self.record[defect_field_index['injection_stage']]

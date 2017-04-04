@@ -5,7 +5,7 @@ from ccollab2eeplatform import utils
 from ccollab2eeplatform.ccollab import review
 from ccollab2eeplatform.ccollab import defect
 from ccollab2eeplatform.log import logger
-from ccollab2eeplatform.data_manager import DataManager
+from ccollab2eeplatform.manager import RecordManager
 
 
 def main():
@@ -69,11 +69,11 @@ def main():
     if len(defect_records) == 0:
         logger.warn('No defect records.')
 
-    data_manager = DataManager(review_records=review_records,
-                               defect_records=defect_records)
+    record_manager = RecordManager(review_records=review_records,
+                                   defect_records=defect_records)
 
     # Start to process all the charts.
-    data_manager.process(review_start_date, review_end_date)
+    record_manager.process(review_start_date, review_end_date)
 
     logger.info('Completed.')
     return 0
