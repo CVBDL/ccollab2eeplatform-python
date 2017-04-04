@@ -12,6 +12,7 @@ from ccollab2eeplatform.filters.creator_filter import CreatorFilter
 from ccollab2eeplatform.settings.charts_settings import ChartsSettings
 from ccollab2eeplatform.settings.eeplatform_settings import EEPlatformSettings
 from ccollab2eeplatform.settings.users_settings import UsersSettings
+from ccollab2eeplatform.statistics.records_statistics import RecordsStatistics
 from ccollab2eeplatform.statistics.defect_records_statistics import (
     DefectRecordsStatistics
 )
@@ -78,12 +79,17 @@ class RecordManager:
         It will call subprocesses to generate each chart.
         """
         self._statistics_factory()
-
         if self._review_statistics is not None:
-            self._process_review_count_by_month()
-            self._process_review_count_by_product()
+            self._process_review()
         if self._defect_statistics is not None:
-            self._process_defect_count_by_product()
+            self._process_defect()
+
+    def _process_review(self):
+        self._process_review_count_by_month()
+        self._process_review_count_by_product()
+
+    def _process_defect(self):
+        self._process_defect_count_by_product()
 
     def _process(self, settings_key, schema, data):
         chart_id = ChartsSettings.get_chart_id(settings_key)
