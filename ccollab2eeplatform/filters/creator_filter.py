@@ -31,6 +31,9 @@ class CreatorFilter():
         Todo:
             Cache the result.
         """
+        if self.records is None:
+            return None
+
         # keywords from function parameter has a higher priority.
         if keywords is None:
             kws = self.keywords

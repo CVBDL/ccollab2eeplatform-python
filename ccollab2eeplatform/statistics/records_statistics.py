@@ -9,6 +9,7 @@ class RecordsStatistics:
     Args:
         records: A list of record.
     """
+
     def __init__(self, records):
         self._records = records
 

@@ -30,60 +30,15 @@ class RecordManager:
         defect_records: A list of defect records.
     """
 
-    def __init__(self, review_records=None, defect_records=None):
+    def __init__(self, start_date, end_date,
+                 review_records=None, defect_records=None):
+        self._start_date = start_date
+        self._end_date = end_date
         self._review_records = review_records
         self._defect_records = defect_records
+        self._review_statistics = None
+        self._defect_statistics = None
         self._client = None
-
-    def process(self, start_date, end_date):
-        """The entry point of processing all of the charts.
-
-        It will call subprocesses to generate each chart.
-
-        Args:
-            start_date (str): The start of time span for given records.
-            end_date (str): The end of time span for given records.
-        """
-        review_records, defect_records = self._get_valid_records()
-        if review_records is not None:
-            self._review_statistics = ReviewRecordsStatistics(review_records)
-            self._process_review_count_by_month()
-            self._process_review_count_by_product()
-        if defect_records is not None:
-            self._defect_statistics = DefectRecordsStatistics(defect_records)
-            self._process_defect_count_by_product()
-
-    def _get_valid_records(self):
-        """Return records which we should use to calculate statistics.
-
-        Only the record which creator login name is in users settings
-        file is considered to be valid.
-        """
-        valid_review_record = None
-        if self._review_records is not None:
-            valid_review_filter = CreatorFilter(
-                self._review_records,
-                UsersSettings.list_login_names()
-            )
-            valid_review_record = valid_review_filter.filter()
-
-        valid_defect_record = None
-        if self._defect_records is not None:
-            valid_defect_filter = CreatorFilter(
-                self._defect_records,
-                UsersSettings.list_login_names()
-            )
-            valid_defect_record = valid_defect_filter.filter()
-
-        return valid_review_record, valid_defect_record
-
-    def _process(self, settings_key, schema, data):
-        chart_id = ChartsSettings.get_chart_id(settings_key)
-        data_table = gviz_api.DataTable(schema, data=data)
-        data_table_json_obj = json.loads(data_table.ToJSon().decode('utf-8'))
-        client = self._get_client()
-        #client.chart.update(chart_id, {'datatable': data_table_json_obj})
-        print(data_table_json_obj)
 
     def _get_client(self):
         """Get an EagleEye Platform API client instance.
@@ -96,6 +51,47 @@ class RecordManager:
                 EEPlatformSettings.get_api_root_endpoint()
             )
         return self._client
+
+    def _get_valid_records(self, records):
+        """Return records which we should use to calculate statistics.
+
+        Only the record which creator login name is in users settings
+        file is considered to be valid.
+        """
+        creator_filter = CreatorFilter(records,
+                                       UsersSettings.list_login_names())
+        return creator_filter.filter()
+
+    def _statistics_factory(self):
+        valid_review_records = self._get_valid_records(self._review_records)
+        valid_defect_records = self._get_valid_records(self._defect_records)
+        if valid_review_records is not None:
+            self._review_statistics = ReviewRecordsStatistics(
+                valid_review_records)
+        if valid_defect_records is not None:
+            self._defect_statistics = DefectRecordsStatistics(
+                valid_defect_records)
+
+    def process(self):
+        """The entry point of processing all of the charts.
+
+        It will call subprocesses to generate each chart.
+        """
+        self._statistics_factory()
+
+        if self._review_statistics is not None:
+            self._process_review_count_by_month()
+            self._process_review_count_by_product()
+        if self._defect_statistics is not None:
+            self._process_defect_count_by_product()
+
+    def _process(self, settings_key, schema, data):
+        chart_id = ChartsSettings.get_chart_id(settings_key)
+        data_table = gviz_api.DataTable(schema, data=data)
+        data_table_json_obj = json.loads(data_table.ToJSon().decode('utf-8'))
+        client = self._get_client()
+        #client.chart.update(chart_id, {'datatable': data_table_json_obj})
+        print(data_table_json_obj)
 
     def _process_review_count_by_month(self):
         """Review: generate review count by month."""
