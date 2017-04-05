@@ -1,6 +1,7 @@
 import unittest
 
 from ccollab2eeplatform import utils
+from itertools import groupby
 
 
 class TestUtils(unittest.TestCase):
@@ -49,6 +50,46 @@ class TestUtils(unittest.TestCase):
             utils.month_range('2017-02', '2017-01'),
             ['2017-02', '2017-01']
         )
+
+    def test_groupby(self):
+        # Setup
+        iterable = ['lucy', 'rose', 'lily']
+
+        # Case
+        groups = []
+        uniquekeys = []
+        for k, g in utils.groupby(iterable):
+            groups.append(list(g)[0])
+            uniquekeys.append(k)
+        self.assertEqual(['lily', 'lucy', 'rose'], uniquekeys)
+        self.assertEqual(['lily', 'lucy', 'rose'], groups)
+
+        # Case
+        groups = []
+        uniquekeys = []
+        for k, g in utils.groupby(iterable, reverse=True):
+            groups.append(list(g)[0])
+            uniquekeys.append(k)
+        self.assertEqual(list(reversed(['lily', 'lucy', 'rose'])), uniquekeys)
+        self.assertEqual(list(reversed(['lily', 'lucy', 'rose'])), groups)
+
+        # Case
+        groups = []
+        uniquekeys = []
+        for k, g in utils.groupby(iterable, key=lambda val: val[1]):
+            groups.append(list(g)[0])
+            uniquekeys.append(k)
+        self.assertEqual(['i', 'o', 'u'], uniquekeys)
+        self.assertEqual(['lily', 'rose', 'lucy'], groups)
+
+        # Case
+        groups = []
+        uniquekeys = []
+        for k, g in utils.groupby(iterable, key=lambda val: val[1], reverse=True):
+            groups.append(list(g)[0])
+            uniquekeys.append(k)
+        self.assertEqual(list(reversed(['i', 'o', 'u'])), uniquekeys)
+        self.assertEqual(list(reversed(['lily', 'rose', 'lucy'])), groups)
 
 
 if __name__ == '__main__':

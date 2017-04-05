@@ -1,4 +1,5 @@
 from datetime import date
+from itertools import groupby as groupby_
 
 
 def to_isoformat(date_str):
@@ -62,3 +63,15 @@ def month_range(start, stop):
         start_date = date(year, month, 1)
 
     return reverse and sorted(result, reverse=reverse) or result
+
+
+def groupby(iterable, key=None, reverse=False):
+    """Wrapper of itertools.groupby function.
+
+    It make use of built-in itertools.groupby function.
+    In addition to sort the iterable with the same key as groupby.
+    Ref: <https://docs.python.org/3/library/itertools.html#itertools.groupby>
+    """
+    if key is None:
+        key = lambda x: x
+    return groupby_(sorted(iterable, key=key, reverse=reverse), key)
