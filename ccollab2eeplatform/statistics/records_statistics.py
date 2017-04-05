@@ -2,6 +2,8 @@
 
 from itertools import groupby
 
+from ccollab2eeplatform import utils
+
 
 class RecordsStatistics:
     """Review records statistics class.
@@ -12,6 +14,67 @@ class RecordsStatistics:
 
     def __init__(self, records):
         self._records = records
+
+    @property
+    def count(self):
+        return len(self._records)
+
+    @property
+    def total_defect(self):
+        return sum(record.defect_count for record in self._records)
+
+    @property
+    def total_comment(self):
+        return sum(record.comment_count for record in self._records)
+
+    @property
+    def total_loc(self):
+        return sum(record.loc for record in self._records)
+
+    @property
+    def total_loc_changed(self):
+        return sum(record.loc_changed for record in self._records)
+
+    @property
+    def total_person_time_in_second(self):
+        return sum(
+            record.total_person_time_in_second for record in self._records
+        )
+
+    @property
+    def groupby_review_creation_month(self):
+        return utils.groupby(self._records,
+                             key=lambda record: record.review_creation_month)
+
+    @property
+    def groupby_review_creation_year(self):
+        return utils.groupby(self._records,
+                             key=lambda record: record.review_creation_year)
+
+    @property
+    def groupby_creator_login(self):
+        return utils.groupby(self._records,
+                             key=lambda record: record.creator_login)
+
+    @property
+    def groupby_creator_product_name(self):
+        return utils.groupby(self._records,
+                             key=lambda record: record.creator_product_name)
+
+    @property
+    def groupby_severity(self):
+        return utils.groupby(self._records,
+                             key=lambda record: record.severity)
+
+    @property
+    def groupby_type_cvb(self):
+        return utils.groupby(self._records,
+                             key=lambda record: record.type_cvb)
+
+    @property
+    def groupby_injection_stage(self):
+        return utils.groupby(self._records,
+                             key=lambda record: record.injection_stage)
 
     def calc_count_by_month(self):
         """Record count by month.

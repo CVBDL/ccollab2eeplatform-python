@@ -73,22 +73,22 @@ class ReviewRecord():
     @property
     def defect_count(self):
         """Defect count."""
-        return self.record[review_field_index['defect_count']]
+        return int(self.record[review_field_index['defect_count']])
 
     @property
     def comment_count(self):
         """Comment count."""
-        return self.record[review_field_index['comment_count']]
+        return int(self.record[review_field_index['comment_count']])
 
     @property
     def loc(self):
         """Line of code."""
-        return self.record[review_field_index['loc']]
+        return int(self.record[review_field_index['loc']])
 
     @property
     def loc_changed(self):
         """Line of code changed."""
-        return self.record[review_field_index['loc_changed']]
+        return int(self.record[review_field_index['loc_changed']])
 
     @property
     def total_person_time(self):

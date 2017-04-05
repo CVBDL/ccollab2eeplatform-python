@@ -1,7 +1,7 @@
 import unittest
+from itertools import groupby
 
 from ccollab2eeplatform import utils
-from itertools import groupby
 
 
 class TestUtils(unittest.TestCase):
