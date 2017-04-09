@@ -13,6 +13,40 @@
     },
     "count_by_product": {
       "_id": "review_count_by_product"
+    },
+    "comment_density_uploaded_by_product": {
+      "_id": "comment_density_uploaded_by_product"
+    },
+    "comment_density_changed_by_product": {
+      "_id": "comment_density_changed_by_product"
+    },
+    "defect_density_uploaded_by_product": {
+      "_id": "defect_density_uploaded_by_product"
+    },
+    "defect_density_changed_by_product": {
+      "_id": "defect_density_changed_by_product"
+    },
+    "comment_density_changed_by_month_from_product": {
+      "": {
+        "_id": "comment_density_changed_by_month_from_all"
+      },
+      "ViewPoint": {
+        "_id": "comment_density_changed_by_month_from_ViewPoint"
+      },
+      "FTView": {
+        "_id": "comment_density_changed_by_month_from_FTView"
+      }
+    },
+    "inspection_rate_by_month_from_product": {
+      "": {
+        "_id": "comment_density_changed_by_month_from_all"
+      },
+      "ViewPoint": {
+        "_id": "comment_density_changed_by_month_from_ViewPoint"
+      },
+      "FTView": {
+        "_id": "comment_density_changed_by_month_from_FTView"
+      }
     }
   },
   "defect": {

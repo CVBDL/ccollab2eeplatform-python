@@ -70,6 +70,12 @@ def main():
             start_date, end_date)
         review_manager.process_count_by_month_from_product()
         review_manager.process_count_by_product()
+        review_manager.process_comment_density_uploaded_by_product()
+        review_manager.process_comment_density_changed_by_product()
+        review_manager.process_defect_density_uploaded_by_product()
+        review_manager.process_defect_density_changed_by_product()
+        review_manager.process_comment_density_changed_by_month_from_product()
+        review_manager.process_inspection_rate_by_month_from_product()
 
     # Download defect data.
     defect_records = defect.fetch_defect_records(start_date, end_date)

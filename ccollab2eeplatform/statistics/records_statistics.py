@@ -41,10 +41,62 @@ class RecordsStatistics:
         return sum(record.loc_changed for record in self._records)
 
     @property
+    def comment_density_uploaded(self):
+        """Code comment density(uploaded).
+        
+        Formula:
+        CommentDensity(uploaded) = (total_comment * 1000) / total_loc
+        """
+        return (self.total_comment * 1000) / self.total_loc
+
+    @property
+    def comment_density_changed(self):
+        """Code comment density(changed).
+        
+        Formula:
+        CommentDensity(changed) = (total_comment * 1000) / total_loc_changed
+        """
+        return (self.total_comment * 1000) / self.total_loc_changed
+
+    @property
+    def defect_density_uploaded(self):
+        """Defect density(uploaded).
+        
+        Formula:
+        DefectDensity(uploaded) = (total_defect * 1000) / total_loc
+        """
+        return (self.total_defect * 1000) / self.total_loc
+
+    @property
+    def defect_density_changed(self):
+        """Defect density(changed).
+        
+        Formula:
+        DefectDensity(changed) = (total_defect * 1000) / total_loc_changed
+        """
+        return (self.total_defect * 1000) / self.total_loc_changed
+
+    @property
     def total_person_time_in_second(self):
         """Total person time in second."""
         return sum(
             record.total_person_time_in_second for record in self._records
+        )
+
+    @property
+    def total_person_time_in_hour(self):
+        """Total person time in hour."""
+        return self.total_person_time_in_second / (60 * 60)
+
+    @property
+    def inspection_rate(self):
+        """Inspection rate.
+        
+        Formula:
+        InspectionRate = (LOCC) / (TotalPersonTimeInHour * 1000)
+        """
+        return (
+            self.total_loc_changed / (self.total_person_time_in_hour * 1000)
         )
 
     @property
@@ -88,46 +140,3 @@ class RecordsStatistics:
         """Groupby injection stage."""
         return utils.groupby(self._records,
                              key=lambda record: record.injection_stage)
-
-    @property
-    def count_by_month(self):
-        """Record count by month.
-
-        Data table:
-        Month    Count
-        2016-01  20
-        2016-03  10
-        2016-05  25
-
-        Returns:
-            A tuple of column definition and data.
-        """
-        schema, data = [('Month', 'string'), ('Count', 'number')], []
-        if self._start_date and self._end_date:
-            stat = {}
-            for key, group in self.groupby_review_creation_month:
-                stat[key] = sum(1 for _ in group)
-            month_range = utils.month_range(self._start_date, self._end_date)
-            for month in month_range:
-                data.append([month, stat.get(month, 0)])
-        else:
-            for key, group in self.groupby_review_creation_month:
-                data.append([key, sum(1 for _ in group)])
-        return schema, data
-
-    @property
-    def count_by_product(self):
-        """Record count by product.
-
-        Data table:
-        Product  Count
-        Team1    20
-        Team2    16
-
-        Returns:
-            A tuple of column definition and data.
-        """
-        schema, data = [('Month', 'string'), ('Count', 'number')], []
-        for key, group in self.groupby_creator_product_name:
-            data.append([key, sum(1 for _ in group)])
-        return schema, data
