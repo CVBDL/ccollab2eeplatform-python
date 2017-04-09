@@ -6,6 +6,7 @@ import ccollab2eeplatform.ccollab.defect as defect
 class TestDefect(unittest.TestCase):
 
     def test_create_download_command(self):
+        # pylint: disable=protected-access
         creation_date_lo = '2016-10-01'
         creation_date_hi = '2016-10-02'
         command = ''.join([

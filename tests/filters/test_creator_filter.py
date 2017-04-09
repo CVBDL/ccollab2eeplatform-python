@@ -16,9 +16,12 @@ class TestCreatorFilter(unittest.TestCase):
             ['6', '2016-11-30 11:55 UTC', 'lily', '', '0', '0', '0', '0', '0:00:10'],
             ['7', '2016-11-30 11:55 UTC', 'pzhong', '', '0', '0', '0', '0', '0:00:10']
         ]
-        self.records = [ ReviewRecord(record) for record in self._records ]
+        self.records = [ReviewRecord(record) for record in self._records]
 
     def test_creator_filter(self):
+        creator_filter = CreatorFilter(self.records, 'pzhong')
+        self.assertEqual(len(creator_filter.filter()), 4)
+
         creator_filter = CreatorFilter(self.records, ['pzhong'])
         self.assertEqual(len(creator_filter.filter()), 4)
 
@@ -37,6 +40,9 @@ class TestCreatorFilter(unittest.TestCase):
         # It should return all records.
         creator_filter = CreatorFilter(self.records)
         self.assertEqual(len(creator_filter.filter()), 7)
+
+        creator_filter = CreatorFilter(self.records)
+        self.assertEqual(len(creator_filter.filter('pzhong')), 4)
 
         creator_filter = CreatorFilter(self.records)
         self.assertEqual(len(creator_filter.filter(['pzhong'])), 4)

@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# pylint: skip-file
+
 """Converts Python data into data for Google Visualization API clients.
 
 This library can be used to create a google.visualization.DataTable usable by

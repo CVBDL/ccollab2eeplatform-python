@@ -3,18 +3,18 @@
 from itertools import filterfalse
 
 
-class CreatorFilter():
-    """Filter records by its creator.
+class ProductFilter():
+    """Filter records by its product name.
 
     Args:
         records: A list of records, each record must have a
-                 "creator_login" property.
+                 "creator_product_name" property.
         keywords: A list of filter keywords.
     Attributes:
         records: Data source to filter.
         keywords: Keywords of filter operation.
     Example:
-        filter = CreatorFilter([Record(creator_login='foo')], ['foo'])
+        filter = CreatorFilter([Record(creator_product_name='foo')], ['foo'])
         filter.filter()
         filter.filter(['bar'])
     """
@@ -48,5 +48,6 @@ class CreatorFilter():
         if not isinstance(kws, list):
             kws = [kws]
         result_iterator = filterfalse(
-            lambda record: not record.creator_login in kws, self.records)
+            lambda record: not record.creator_product_name in kws,
+            self.records)
         return list(result_iterator)

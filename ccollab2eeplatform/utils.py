@@ -1,3 +1,5 @@
+"""Custom utils."""
+
 from datetime import date
 from itertools import groupby as groupby_
 
@@ -17,11 +19,12 @@ def to_isoformat(date_str):
 
 
 def from_isoformat(date_str):
+    """Create date from iso string."""
     message = 'Date should be in ISO 8601 format: "YYYY-MM-DD"'
     if not isinstance(date_str, str):
         raise Exception(message)
     try:
-        parts = [ int(part) for part in date_str.split('-') ]
+        parts = [int(part) for part in date_str.split('-')]
         return date(parts[0], parts[1], parts[2])
     except:
         raise Exception(message)

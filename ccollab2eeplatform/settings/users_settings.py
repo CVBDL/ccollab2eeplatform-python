@@ -24,7 +24,7 @@ class UsersSettings():
         Returns:
             A list of login names.
         """
-        return [ user['login_name'] for user in cls.users ]
+        return [user['login_name'] for user in cls.users]
 
     @classmethod
     def get_product_by_login(cls, login_name):

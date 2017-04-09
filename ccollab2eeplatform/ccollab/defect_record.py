@@ -1,6 +1,6 @@
 """Define a defect record."""
 
-from ccollab2eeplatform.ccollab.record_field_index import defect_field_index
+from ccollab2eeplatform.ccollab.record_field_index import DEFECT_FIELD_INDEX
 from ccollab2eeplatform.settings.users_settings import UsersSettings
 
 
@@ -17,12 +17,12 @@ class DefectRecord():
     @property
     def defect_id(self):
         """Defect id."""
-        return self.record[defect_field_index['defect_id']]
+        return self.record[DEFECT_FIELD_INDEX['defect_id']]
 
     @property
     def review_id(self):
         """Review id."""
-        return self.record[defect_field_index['review_id']]
+        return self.record[DEFECT_FIELD_INDEX['review_id']]
 
     @property
     def review_creation_date(self):
@@ -31,7 +31,7 @@ class DefectRecord():
         Examples:
             "2017-01-09 15:59 UTC"
         """
-        return self.record[defect_field_index['review_creation_date']]
+        return self.record[DEFECT_FIELD_INDEX['review_creation_date']]
 
     @property
     def review_creation_year(self):
@@ -55,12 +55,12 @@ class DefectRecord():
     @property
     def creator_login(self):
         """Creator login name."""
-        return self.record[defect_field_index['creator_login']]
+        return self.record[DEFECT_FIELD_INDEX['creator_login']]
 
     @property
     def creator_full_name(self):
         """Creator full name."""
-        return self.record[defect_field_index['creator_full_name']]
+        return self.record[DEFECT_FIELD_INDEX['creator_full_name']]
 
     @property
     def creator_product_name(self):
@@ -74,14 +74,14 @@ class DefectRecord():
     @property
     def severity(self):
         """Severity."""
-        return self.record[defect_field_index['severity']]
+        return self.record[DEFECT_FIELD_INDEX['severity']]
 
     @property
     def type_cvb(self):
         """Type CVB."""
-        return self.record[defect_field_index['type_cvb']]
+        return self.record[DEFECT_FIELD_INDEX['type_cvb']]
 
     @property
     def injection_stage(self):
         """Injection state."""
-        return self.record[defect_field_index['injection_stage']]
+        return self.record[DEFECT_FIELD_INDEX['injection_stage']]

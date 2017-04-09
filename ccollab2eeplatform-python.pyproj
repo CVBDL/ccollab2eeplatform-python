@@ -23,6 +23,9 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
+    <Content Include=".pylintrc">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="ccollab2eeplatform\settings\ccollab-settings.json">
       <SubType>Code</SubType>
     </Content>
@@ -55,6 +58,9 @@
     <Compile Include="ccollab2eeplatform\ccollab\review_record.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ccollab2eeplatform\filters\product_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ccollab2eeplatform\settings\charts_settings.py">
       <SubType>Code</SubType>
     </Compile>
@@ -85,20 +91,12 @@
     <Compile Include="ccollab2eeplatform\filters\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ccollab2eeplatform\google_visualization\examples\dynamic_example.py" />
-    <Compile Include="ccollab2eeplatform\google_visualization\examples\static_example.py" />
     <Compile Include="ccollab2eeplatform\google_visualization\gviz_api.py" />
     <Compile Include="ccollab2eeplatform\google_visualization\__init__.py" />
     <Compile Include="ccollab2eeplatform\log.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\settings\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ccollab2eeplatform\statistics\defect_records_statistics.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ccollab2eeplatform\statistics\review_records_statistics.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ccollab2eeplatform\statistics\__init__.py">
@@ -143,9 +141,6 @@
     <Compile Include="tests\settings\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="tests\statistics\test_review_records_statistics.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="tests\statistics\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -161,7 +156,6 @@
     <Folder Include="ccollab2eeplatform\ccollab\" />
     <Folder Include="ccollab2eeplatform\filters\" />
     <Folder Include="ccollab2eeplatform\google_visualization\" />
-    <Folder Include="ccollab2eeplatform\google_visualization\examples\" />
     <Folder Include="ccollab2eeplatform\settings\" />
     <Folder Include="ccollab2eeplatform\statistics\" />
     <Folder Include="tests\" />

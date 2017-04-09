@@ -1,3 +1,5 @@
+# pylint: skip-file
+
 import unittest
 
 from ccollab2eeplatform.ccollab.review_record import ReviewRecord
@@ -31,9 +33,6 @@ class TestReviewRecord(unittest.TestCase):
         ]
         self.record_1 = ReviewRecord(_record_1)
 
-    def test_id(self):
-        self.assertEqual('88369', self.record.id)
-
     def test_review_creation_date(self):
         self.assertEqual('2016-11-30 11:55 UTC',
                          self.record.review_creation_date)
@@ -45,16 +44,16 @@ class TestReviewRecord(unittest.TestCase):
         self.assertEqual('Patrick Zhong', self.record.creator_full_name)
 
     def test_defect_count(self):
-        self.assertEqual('0', self.record.defect_count)
+        self.assertEqual(0, self.record.defect_count)
 
     def test_comment_count(self):
-        self.assertEqual('14', self.record.comment_count)
+        self.assertEqual(14, self.record.comment_count)
 
     def test_loc(self):
-        self.assertEqual('8728', self.record.loc)
+        self.assertEqual(8728, self.record.loc)
 
     def test_loc_changed(self):
-        self.assertEqual('162', self.record.loc_changed)
+        self.assertEqual(162, self.record.loc_changed)
 
     def test_total_person_time(self):
         self.assertEqual('0:11:32', self.record.total_person_time)

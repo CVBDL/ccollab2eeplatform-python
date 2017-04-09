@@ -47,22 +47,27 @@ def fetch_defect_records(creation_date_lo, creation_date_hi):
     # The downloaded CSV file is 'utf-8-sig' encoded.
     # utf-8:     'ABC'
     # utf-8-sig: '\xef\xbb\xbfABC'
-    #with tempfile.TemporaryFile(mode='w+', encoding='utf-8-sig') as temp_csv:
-    #    logger.info('Downloading defect CSV file ...')
-    #    subprocess.run(command, shell=True, stdout=temp_csv)
-    #    logger.info('Downloading defect CSV file ... Done')
-    #    temp_csv.seek(0)
-    #    defect_reader = csv.reader(temp_csv, delimiter=',')
-    #    # skip header record
-    #    try:
-    #        next(defect_reader)
-    #    except StopIteration:
-    #        pass
-    #    else:
-    #        for record in defect_reader:
-    #            defect_records.append(record)
+    with tempfile.TemporaryFile(mode='w+', encoding='utf-8-sig') as temp_csv:
+        logger.info('Downloading defect CSV file ...')
+        subprocess.run(command, shell=True, stdout=temp_csv)
+        logger.info('Downloading defect CSV file ... Done')
+        temp_csv.seek(0)
+        defect_reader = csv.reader(temp_csv, delimiter=',')
+        # skip header record
+        try:
+            next(defect_reader)
+        except StopIteration:
+            pass
+        else:
+            for record in defect_reader:
+                defect_records.append(record)
 
-    #return defect_records
+    return defect_records
+
+def fetch_defect_records(creation_date_lo, creation_date_hi):
+    # pylint: disable=function-redefined, unused-argument
+    """Download defect CSV into a temp file."""
+    defect_records = []
 
     import os
     filepath = os.path.dirname(__file__) + './defects-report.csv'

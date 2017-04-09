@@ -1,11 +1,31 @@
 {
-  "review_count_by_month": {
-    "_id": "58b12147a1e9b417886d3c01"
+  "review": {
+    "count_by_month_from_product": {
+      "": {
+        "_id": "review_count_by_month_from_all"
+      },
+      "ViewPoint": {
+        "_id": "review_count_by_month_from_ViewPoint"
+      },
+      "FTView": {
+        "_id": "review_count_by_month_from_FTView"
+      }
+    },
+    "count_by_product": {
+      "_id": "review_count_by_product"
+    }
   },
-  "review_count_by_product": {
-    "_id": "58b12147a1e9b417886d3c01"
-  },
-  "defect_count_by_product": {
-    "_id": "58b12147a1e9b417886d3c01"
+  "defect": {
+    "count_by_month_from_product": {
+      "": {
+        "_id": "defect_count_by_month_from_all"
+      },
+      "ViewPoint": {
+        "_id": "defect_count_by_month_from_ViewPoint"
+      }
+    },
+    "count_by_product": {
+      "_id": "defect_count_by_product"
+    }
   }
 }

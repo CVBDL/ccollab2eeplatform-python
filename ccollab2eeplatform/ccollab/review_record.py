@@ -1,6 +1,6 @@
 """Define a review record."""
 
-from ccollab2eeplatform.ccollab.record_field_index import review_field_index
+from ccollab2eeplatform.ccollab.record_field_index import REVIEW_FIELD_INDEX
 from ccollab2eeplatform.settings.users_settings import UsersSettings
 
 
@@ -15,14 +15,9 @@ class ReviewRecord():
         self.record = record
 
     @property
-    def id(self):
-        """Review id."""
-        return self.record[review_field_index['id']]
-
-    @property
     def review_id(self):
         """Alias: review id."""
-        return self.record[review_field_index['id']]
+        return self.record[REVIEW_FIELD_INDEX['id']]
 
     @property
     def review_creation_date(self):
@@ -31,7 +26,7 @@ class ReviewRecord():
         Examples:
             "2017-01-09 15:59 UTC"
         """
-        return self.record[review_field_index['review_creation_date']]
+        return self.record[REVIEW_FIELD_INDEX['review_creation_date']]
 
     @property
     def review_creation_year(self):
@@ -54,12 +49,12 @@ class ReviewRecord():
     @property
     def creator_login(self):
         """Creator login name."""
-        return self.record[review_field_index['creator_login']]
+        return self.record[REVIEW_FIELD_INDEX['creator_login']]
 
     @property
     def creator_full_name(self):
         """Creator full name."""
-        return self.record[review_field_index['creator_full_name']]
+        return self.record[REVIEW_FIELD_INDEX['creator_full_name']]
 
     @property
     def creator_product_name(self):
@@ -73,27 +68,27 @@ class ReviewRecord():
     @property
     def defect_count(self):
         """Defect count."""
-        return int(self.record[review_field_index['defect_count']])
+        return int(self.record[REVIEW_FIELD_INDEX['defect_count']])
 
     @property
     def comment_count(self):
         """Comment count."""
-        return int(self.record[review_field_index['comment_count']])
+        return int(self.record[REVIEW_FIELD_INDEX['comment_count']])
 
     @property
     def loc(self):
         """Line of code."""
-        return int(self.record[review_field_index['loc']])
+        return int(self.record[REVIEW_FIELD_INDEX['loc']])
 
     @property
     def loc_changed(self):
         """Line of code changed."""
-        return int(self.record[review_field_index['loc_changed']])
+        return int(self.record[REVIEW_FIELD_INDEX['loc_changed']])
 
     @property
     def total_person_time(self):
         """Review total person time."""
-        return self.record[review_field_index['total_person_time']]
+        return self.record[REVIEW_FIELD_INDEX['total_person_time']]
 
     @property
     def total_person_time_in_second(self):

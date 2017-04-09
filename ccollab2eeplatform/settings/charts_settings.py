@@ -27,15 +27,3 @@ class ChartsSettings:
             A dict of settings or None if not found.
         """
         return cls.settings.get(key, None)
-
-    @classmethod
-    def get_chart_id(cls, key):
-        """Return chart's _id by a key.
-
-        Args:
-            key (str): The key for finding settings.
-        Returns:
-            Chart id string or None if not found.
-        """
-        setting = cls.get_settings(key)
-        return setting and setting.get('_id', None)

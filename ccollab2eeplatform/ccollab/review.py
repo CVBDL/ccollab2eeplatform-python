@@ -46,22 +46,28 @@ def fetch_review_records(creation_date_lo, creation_date_hi):
     # The downloaded CSV file is 'utf-8-sig' encoded.
     # utf-8:     'ABC'
     # utf-8-sig: '\xef\xbb\xbfABC'
-    #with tempfile.TemporaryFile(mode='w+', encoding='utf-8-sig') as temp_csv:
-    #    logger.info('Downloading review CSV file ...')
-    #    subprocess.run(command, shell=True, stdout=temp_csv)
-    #    logger.info('Downloading review CSV file ... Done')
-    #    temp_csv.seek(0)
-    #    review_reader = csv.reader(temp_csv, delimiter=',')
-    #    # skip header record
-    #    try:
-    #        next(review_reader)
-    #    except StopIteration:
-    #        pass
-    #    else:
-    #        for record in review_reader:
-    #            review_records.append(record)
+    with tempfile.TemporaryFile(mode='w+', encoding='utf-8-sig') as temp_csv:
+        logger.info('Downloading review CSV file ...')
+        subprocess.run(command, shell=True, stdout=temp_csv)
+        logger.info('Downloading review CSV file ... Done')
+        temp_csv.seek(0)
+        review_reader = csv.reader(temp_csv, delimiter=',')
+        # skip header record
+        try:
+            next(review_reader)
+        except StopIteration:
+            pass
+        else:
+            for record in review_reader:
+                review_records.append(record)
 
-    #return review_records
+    return review_records
+
+
+def fetch_review_records(creation_date_lo, creation_date_hi):
+    # pylint: disable=function-redefined, unused-argument
+    """Download review CSV into a temp file."""
+    review_records = []
 
     import os
     filepath = os.path.dirname(__file__) + './reviews-report.csv'

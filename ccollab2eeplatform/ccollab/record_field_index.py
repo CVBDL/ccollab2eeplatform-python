@@ -1,7 +1,7 @@
 """Mapping of field name and its index in review/defect CSV file."""
 
 
-review_field_index = {
+REVIEW_FIELD_INDEX = {
     'id': 0,
     'review_creation_date': 1,
     'creator_login': 2,
@@ -14,7 +14,7 @@ review_field_index = {
 }
 
 
-defect_field_index = {
+DEFECT_FIELD_INDEX = {
     'defect_id': 0,
     'review_id': 1,
     'review_creation_date': 2,
