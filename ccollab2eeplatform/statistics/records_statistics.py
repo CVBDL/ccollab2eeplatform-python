@@ -10,10 +10,8 @@ class RecordsStatistics:
         records: A list of record.
     """
 
-    def __init__(self, records, start_date=None, end_date=None):
+    def __init__(self, records):
         self._records = records
-        self._start_date = start_date
-        self._end_date = end_date
 
     @property
     def count(self):
@@ -102,14 +100,14 @@ class RecordsStatistics:
     @property
     def groupby_review_creation_month(self):
         """Groupby review creation month."""
-        return utils.groupby(self._records,
-                             key=lambda record: record.review_creation_month)
+        return utils.groupby(
+            self._records, key=lambda record: record.review_creation_month)
 
     @property
     def groupby_review_creation_year(self):
         """Groupby review creation year."""
-        return utils.groupby(self._records,
-                             key=lambda record: record.review_creation_year)
+        return utils.groupby(
+            self._records, key=lambda record: record.review_creation_year)
 
     @property
     def groupby_creator_login(self):
@@ -120,23 +118,23 @@ class RecordsStatistics:
     @property
     def groupby_creator_product_name(self):
         """Groupby creator product name."""
-        return utils.groupby(self._records,
-                             key=lambda record: record.creator_product_name)
+        return utils.groupby(
+            self._records, key=lambda record: record.creator_product_name)
 
     @property
     def groupby_severity(self):
         """Groupby severity."""
-        return utils.groupby(self._records,
-                             key=lambda record: record.severity)
+        return utils.groupby(
+            self._records, key=lambda record: record.severity)
 
     @property
     def groupby_type_cvb(self):
         """Groupby type cvb."""
-        return utils.groupby(self._records,
-                             key=lambda record: record.type_cvb)
+        return utils.groupby(
+            self._records, key=lambda record: record.type_cvb)
 
     @property
     def groupby_injection_stage(self):
         """Groupby injection stage."""
-        return utils.groupby(self._records,
-                             key=lambda record: record.injection_stage)
+        return utils.groupby(
+            self._records, key=lambda record: record.injection_stage)

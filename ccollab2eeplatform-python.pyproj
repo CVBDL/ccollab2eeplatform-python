@@ -141,6 +141,9 @@
     <Compile Include="tests\settings\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\statistics\test_records_statistics.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\statistics\__init__.py">
       <SubType>Code</SubType>
     </Compile>
