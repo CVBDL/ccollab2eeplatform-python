@@ -71,7 +71,7 @@ class RecordManager:
         """Count by month from product."""
         name = 'count_by_month_from_product'
 
-        def _process_count_by_month_from_product(product, setting):
+        def _process(product, setting):
             """Record count by month.
 
             Data table:
@@ -95,7 +95,7 @@ class RecordManager:
 
         # Start to process for all products.
         for product, setting in self._settings[name].items():
-            _process_count_by_month_from_product(product, setting)
+            _process(product, setting)
 
     def process_count_by_product(self):
         """Record count by product.
@@ -158,7 +158,7 @@ class RecordManager:
         """Generate chart of comment density(changed) by month from product."""
         name = 'comment_density_changed_by_month_from_product'
 
-        def _process_comment_density_changed_by_month_from_product(
+        def _process(
                 product, setting):
             """Comment density(changed) by month.
 
@@ -183,7 +183,7 @@ class RecordManager:
 
         # Start to process for all products.
         for product, setting in self._settings[name].items():
-            _process_comment_density_changed_by_month_from_product(
+            _process(
                 product, setting)
 
     def process_defect_density_uploaded_by_product(self):
@@ -231,7 +231,7 @@ class RecordManager:
         """Inspection rate by month from product."""
         name = 'inspection_rate_by_month_from_product'
 
-        def _process_inspection_rate_by_month_from_product(product, setting):
+        def _process(product, setting):
             """Inspection rate by month.
 
             Data table:
@@ -259,5 +259,5 @@ class RecordManager:
 
         # Start to process for all products.
         for product, setting in self._settings[name].items():
-            _process_inspection_rate_by_month_from_product(
+            _process(
                 product, setting)
