@@ -68,14 +68,7 @@ def main():
         review_manager = RecordManager(
             review_records, ChartsSettings.get_settings('review'),
             start_date, end_date)
-        review_manager.process_count_by_month_from_product()
-        review_manager.process_count_by_product()
-        review_manager.process_comment_density_uploaded_by_product()
-        review_manager.process_comment_density_changed_by_product()
-        review_manager.process_defect_density_uploaded_by_product()
-        review_manager.process_defect_density_changed_by_product()
-        review_manager.process_comment_density_changed_by_month_from_product()
-        review_manager.process_inspection_rate_by_month_from_product()
+        review_manager.process()
 
     # Download defect data.
     defect_records = defect.fetch_defect_records(start_date, end_date)
@@ -85,8 +78,7 @@ def main():
         defect_manager = RecordManager(
             defect_records, ChartsSettings.get_settings('defect'),
             start_date, end_date)
-        defect_manager.process_count_by_month_from_product()
-        defect_manager.process_count_by_product()
+        defect_manager.process()
 
     logger.info('Completed.')
     return 0

@@ -60,6 +60,9 @@
     },
     "count_by_product": {
       "_id": "defect_count_by_product"
+    },
+    "comment_density_uploaded_by_product": {
+      "_id": "comment_density_uploaded_by_product"
     }
   }
 }
