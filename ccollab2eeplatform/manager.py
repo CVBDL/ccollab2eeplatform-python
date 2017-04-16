@@ -51,9 +51,9 @@ class RecordManager:
 
     def _save(self, setting, schema, data):
         """Save data table to EagleEye platform."""
-        if not setting:
+        if not setting or not setting.get('_id'):
             return
-        chart_id = setting['_id']
+        chart_id = setting.get('_id')
         data_table = gviz_api.DataTable(schema, data=data)
         data_table_json_obj = json.loads(data_table.ToJSon().decode('utf-8'))
         client = self._get_client()
@@ -74,7 +74,7 @@ class RecordManager:
         self.inspection_rate_by_month_from_product()
 
     def count_by_month_from_product(self):
-        """Count by month from product.
+        """Records count by month from product.
 
         Data table:
         Month    Count
@@ -106,7 +106,7 @@ class RecordManager:
                 process_product(product, setting)
 
     def count_by_product(self):
-        """Record count by product.
+        """Records count by product.
 
         Data table:
         Product  Count
