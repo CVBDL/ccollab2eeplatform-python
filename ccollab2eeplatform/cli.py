@@ -25,7 +25,7 @@ def main():
 
     args = parser.parse_args()
 
-    # Process EagleEye Platform task
+    # Process EagleEye platform task
     if args.task_id is None:
         logger.warning('Cannot update task state to EagleEye Platform, '
                        'because no task id provided on command line.')
@@ -44,8 +44,7 @@ def main():
     if args.start_date is None:
         try:
             delta = timedelta(days=365)
-            parts = [int(part) for part in end_date.split('-')]
-            start = date(parts[0], parts[1], parts[2]) - delta
+            start = utils.from_isoformat(end_date) - delta
             start_date = start.isoformat()
         except Exception as e:
             logger.error('Error occurred setting start date. Details: %s', e)
@@ -65,6 +64,7 @@ def main():
     if len(review_records) == 0:
         logger.warning('No review records.')
     else:
+        # Generate charts.
         review_manager = RecordManager(
             review_records, ChartsSettings.get_settings('review'),
             start_date, end_date)
@@ -75,6 +75,7 @@ def main():
     if len(defect_records) == 0:
         logger.warning('No defect records.')
     else:
+        # Generate charts.
         defect_manager = RecordManager(
             defect_records, ChartsSettings.get_settings('defect'),
             start_date, end_date)

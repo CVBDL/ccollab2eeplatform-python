@@ -1,7 +1,4 @@
-"""Data manager module.
-
-Collect data of each defined chart, and send it to EagleEye Platform.
-"""
+"""Statistics analysis and save to EagleEye platform."""
 
 import json
 
@@ -18,9 +15,7 @@ from ccollab2eeplatform.statistics.records_statistics import RecordsStatistics
 
 
 class RecordManager:
-    """Main data manager class.
-
-    Generate all review and defect related charts.
+    """Record manager class.
 
     Args:
         records: A list of records.
@@ -68,16 +63,17 @@ class RecordManager:
         print()
 
     def process(self):
-        self.process_count_by_month_from_product()
-        self.process_count_by_product()
-        self.process_comment_density_uploaded_by_product()
-        self.process_comment_density_changed_by_product()
-        self.process_defect_density_uploaded_by_product()
-        self.process_defect_density_changed_by_product()
-        self.process_comment_density_changed_by_month_from_product()
-        self.process_inspection_rate_by_month_from_product()
+        """Process all charts."""
+        self.count_by_month_from_product()
+        self.count_by_product()
+        self.comment_density_uploaded_by_product()
+        self.comment_density_changed_by_product()
+        self.defect_density_uploaded_by_product()
+        self.defect_density_changed_by_product()
+        self.comment_density_changed_by_month_from_product()
+        self.inspection_rate_by_month_from_product()
 
-    def process_count_by_month_from_product(self):
+    def count_by_month_from_product(self):
         """Count by month from product.
 
         Data table:
@@ -91,16 +87,15 @@ class RecordManager:
             data = []
             valid_records = self._get_valid_records()
             product_records = ProductFilter(valid_records, product).filter()
-            stat = RecordsStatistics(product_records)
-            count_by_month = {}
             try:
+                count_by_month = {}
+                stat = RecordsStatistics(product_records)
                 for month, group in stat.groupby_review_creation_month:
                     _stat = RecordsStatistics(list(group))
                     count_by_month[month] = _stat.count
             except AttributeError:
                 return 1
-            month_range = utils.month_range(self._start_date, self._end_date)
-            for month in month_range:
+            for month in utils.month_range(self._start_date, self._end_date):
                 data.append([month, count_by_month.get(month, 0)])
             self._save(setting, schema, data)
 
@@ -110,7 +105,7 @@ class RecordManager:
             for product, setting in self._settings.get(name).items():
                 process_product(product, setting)
 
-    def process_count_by_product(self):
+    def count_by_product(self):
         """Record count by product.
 
         Data table:
@@ -122,17 +117,16 @@ class RecordManager:
         schema = [('Product', 'string'), ('Count', 'number')]
         data = []
         valid_records = self._get_valid_records()
-        stat = RecordsStatistics(valid_records)
         try:
+            stat = RecordsStatistics(valid_records)
             for product, group in stat.groupby_creator_product_name:
                 _stat = RecordsStatistics(list(group))
                 data.append([product, _stat.count])
         except AttributeError:
             return 1
-        setting = self._settings.get(name)
-        self._save(setting, schema, data)
+        self._save(self._settings.get(name), schema, data)
 
-    def process_comment_density_uploaded_by_product(self):
+    def comment_density_uploaded_by_product(self):
         """Comment density(uploaded) by product.
 
         Data table:
@@ -144,17 +138,16 @@ class RecordManager:
         schema = [('Product', 'string'), ('Comments/KLOC', 'number')]
         data = []
         valid_records = self._get_valid_records()
-        stat = RecordsStatistics(valid_records)
         try:
+            stat = RecordsStatistics(valid_records)
             for product, group in stat.groupby_creator_product_name:
                 _stat = RecordsStatistics(list(group))
                 data.append([product, _stat.comment_density_uploaded])
         except AttributeError:
             return 1
-        setting = self._settings.get(name)
-        self._save(setting, schema, data)
+        self._save(self._settings.get(name), schema, data)
 
-    def process_comment_density_changed_by_product(self):
+    def comment_density_changed_by_product(self):
         """Comment density(changed) by product.
 
         Data table:
@@ -166,17 +159,16 @@ class RecordManager:
         schema = [('Product', 'string'), ('Comments/KLOCC', 'number')]
         data = []
         valid_records = self._get_valid_records()
-        stat = RecordsStatistics(valid_records)
         try:
+            stat = RecordsStatistics(valid_records)
             for product, group in stat.groupby_creator_product_name:
                 _stat = RecordsStatistics(list(group))
                 data.append([product, _stat.comment_density_changed])
         except AttributeError:
             return 1
-        setting = self._settings.get(name)
-        self._save(setting, schema, data)
+        self._save(self._settings.get(name), schema, data)
 
-    def process_comment_density_changed_by_month_from_product(self):
+    def comment_density_changed_by_month_from_product(self):
         """Comment density(changed) by month.
 
         Data table:
@@ -190,16 +182,15 @@ class RecordManager:
             data = []
             valid_records = self._get_valid_records()
             product_records = ProductFilter(valid_records, product).filter()
-            stat = RecordsStatistics(product_records)
-            density_by_month = {}
             try:
+                density_by_month = {}
+                stat = RecordsStatistics(product_records)
                 for month, group in stat.groupby_review_creation_month:
                     _stat = RecordsStatistics(list(group))
                     density_by_month[month] = _stat.comment_density_changed
             except AttributeError:
                 return 1
-            month_range = utils.month_range(self._start_date, self._end_date)
-            for month in month_range:
+            for month in utils.month_range(self._start_date, self._end_date):
                 data.append([month, density_by_month.get(month, 0)])
             self._save(setting, schema, data)
 
@@ -208,7 +199,7 @@ class RecordManager:
             for product, setting in self._settings.get(name).items():
                 _process(product, setting)
 
-    def process_defect_density_uploaded_by_product(self):
+    def defect_density_uploaded_by_product(self):
         """Defect density(uploaded) by product.
 
         Data table:
@@ -220,17 +211,16 @@ class RecordManager:
         schema = [('Product', 'string'), ('Defects/KLOC', 'number')]
         data = []
         valid_records = self._get_valid_records()
-        stat = RecordsStatistics(valid_records)
         try:
+            stat = RecordsStatistics(valid_records)
             for product, group in stat.groupby_creator_product_name:
                 _stat = RecordsStatistics(list(group))
                 data.append([product, _stat.defect_density_uploaded])
         except AttributeError:
             return 1
-        setting = self._settings.get(name)
-        self._save(setting, schema, data)
+        self._save(self._settings.get(name), schema, data)
 
-    def process_defect_density_changed_by_product(self):
+    def defect_density_changed_by_product(self):
         """Defect density(changed) by product.
 
         Data table:
@@ -242,17 +232,16 @@ class RecordManager:
         schema = [('Product', 'string'), ('Defects/KLOCC', 'number')]
         data = []
         valid_records = self._get_valid_records()
-        stat = RecordsStatistics(valid_records)
         try:
+            stat = RecordsStatistics(valid_records)
             for product, group in stat.groupby_creator_product_name:
                 _stat = RecordsStatistics(list(group))
                 data.append([product, _stat.defect_density_changed])
         except AttributeError:
             return 1
-        setting = self._settings.get(name)
-        self._save(setting, schema, data)
+        self._save(self._settings.get(name), schema, data)
 
-    def process_inspection_rate_by_month_from_product(self):
+    def inspection_rate_by_month_from_product(self):
         """Inspection rate by month.
 
         Data table:
@@ -267,16 +256,15 @@ class RecordManager:
             data = []
             valid_records = self._get_valid_records()
             product_records = ProductFilter(valid_records, product).filter()
-            stat = RecordsStatistics(product_records)
-            stat_by_month = {}
             try:
+                stat_by_month = {}
+                stat = RecordsStatistics(product_records)
                 for month, group in stat.groupby_review_creation_month:
                     _stat = RecordsStatistics(list(group))
                     stat_by_month[month] = _stat.inspection_rate
             except AttributeError:
                 return 1
-            month_range = utils.month_range(self._start_date, self._end_date)
-            for month in month_range:
+            for month in utils.month_range(self._start_date, self._end_date):
                 data.append([month, stat_by_month.get(month, 0)])
             self._save(setting, schema, data)
 
