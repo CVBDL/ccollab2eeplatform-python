@@ -45,7 +45,10 @@ class RecordsStatistics:
         Formula:
         CommentDensity(uploaded) = (total_comment * 1000) / total_loc
         """
-        return (self.total_comment * 1000) / self.total_loc
+        try:
+            return (self.total_comment * 1000) / self.total_loc
+        except ZeroDivisionError:
+            return 0
 
     @property
     def comment_density_changed(self):
@@ -54,7 +57,10 @@ class RecordsStatistics:
         Formula:
         CommentDensity(changed) = (total_comment * 1000) / total_loc_changed
         """
-        return (self.total_comment * 1000) / self.total_loc_changed
+        try:
+            return (self.total_comment * 1000) / self.total_loc_changed
+        except ZeroDivisionError:
+            return 0
 
     @property
     def defect_density_uploaded(self):
@@ -63,7 +69,10 @@ class RecordsStatistics:
         Formula:
         DefectDensity(uploaded) = (total_defect * 1000) / total_loc
         """
-        return (self.total_defect * 1000) / self.total_loc
+        try:
+            return (self.total_defect * 1000) / self.total_loc
+        except ZeroDivisionError:
+            return 0
 
     @property
     def defect_density_changed(self):
@@ -72,7 +81,10 @@ class RecordsStatistics:
         Formula:
         DefectDensity(changed) = (total_defect * 1000) / total_loc_changed
         """
-        return (self.total_defect * 1000) / self.total_loc_changed
+        try:
+            return (self.total_defect * 1000) / self.total_loc_changed
+        except ZeroDivisionError:
+            return 0
 
     @property
     def total_person_time_in_second(self):
@@ -93,9 +105,11 @@ class RecordsStatistics:
         Formula:
         InspectionRate = (LOCC) / (TotalPersonTimeInHour * 1000)
         """
-        return (
-            self.total_loc_changed / (self.total_person_time_in_hour * 1000)
-        )
+        try:
+            return (self.total_loc_changed
+                   / (self.total_person_time_in_hour * 1000))
+        except ZeroDivisionError:
+            return 0
 
     @property
     def groupby_review_creation_month(self):
