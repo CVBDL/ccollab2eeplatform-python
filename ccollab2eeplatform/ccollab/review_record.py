@@ -47,6 +47,15 @@ class ReviewRecord():
         return (self.review_creation_date)[0:7]
 
     @property
+    def review_creation_day(self):
+        """Day of review creation date.
+
+        Returns:
+            str: A month like "2017-01-09".
+        """
+        return (self.review_creation_date)[0:10]
+
+    @property
     def creator_login(self):
         """Creator login name."""
         return self.record[REVIEW_FIELD_INDEX['creator_login']]

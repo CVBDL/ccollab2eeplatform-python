@@ -58,6 +58,9 @@
     <Compile Include="ccollab2eeplatform\ccollab\review_record.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ccollab2eeplatform\filters\date_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ccollab2eeplatform\filters\product_filter.py">
       <SubType>Code</SubType>
     </Compile>
@@ -130,6 +133,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\filters\test_creator_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\filters\test_date_filter.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\filters\__init__.py">

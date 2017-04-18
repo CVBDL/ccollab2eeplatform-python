@@ -3,7 +3,7 @@
 from itertools import filterfalse
 
 
-class CreatorFilter():
+class CreatorFilter:
     """Filter records by its creator.
 
     Args:

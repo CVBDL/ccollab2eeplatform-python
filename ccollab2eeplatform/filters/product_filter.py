@@ -3,7 +3,7 @@
 from itertools import filterfalse
 
 
-class ProductFilter():
+class ProductFilter:
     """Filter records by its product name.
 
     Args:
