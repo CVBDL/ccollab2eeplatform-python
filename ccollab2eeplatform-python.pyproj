@@ -138,6 +138,9 @@
     <Compile Include="tests\filters\test_date_filter.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\filters\test_product_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\filters\__init__.py">
       <SubType>Code</SubType>
     </Compile>

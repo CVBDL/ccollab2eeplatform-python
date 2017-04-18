@@ -16,38 +16,28 @@ class ProductFilter:
     Example:
         filter = CreatorFilter([Record(creator_product_name='foo')], ['foo'])
         filter.filter()
-        filter.filter(['bar'])
     """
 
     def __init__(self, records, keywords=None):
         self.records = records
+        self.set_keywords(keywords)
+
+    def set_keywords(self, keywords=None):
+        """Setter for keywords."""
+        if not keywords:
+            keywords = []
+        if not isinstance(keywords, list):
+            keywords = [keywords]
         self.keywords = keywords
 
-    def filter(self, keywords=None):
-        """Filter records, and return the result.
-
-        Args:
-            keywords: A list of filter keywords.
-        Returns:
-            A list of records filter out by given keywords.
-        Todo:
-            Cache the result.
-        """
-        if self.records is None:
-            return None
-
-        # keywords from function parameter has a higher priority.
-        if keywords is None:
-            kws = self.keywords
-        else:
-            kws = keywords
-
-        # If no keywords provided, then do nothing.
-        if not kws:
+    def filter(self):
+        """Filter function."""
+        if not self.records:
             return self.records
-        if not isinstance(kws, list):
-            kws = [kws]
+        if not self.keywords:
+            return self.records
+
         result_iterator = filterfalse(
-            lambda record: not record.creator_product_name in kws,
+            lambda record: not record.creator_product_name in self.keywords,
             self.records)
         return list(result_iterator)

@@ -8,6 +8,7 @@ import ccollab2eeplatform.google_visualization.gviz_api as gviz_api
 from ccollab2eeplatform import utils
 from ccollab2eeplatform.log import logger
 from ccollab2eeplatform.filters.creator_filter import CreatorFilter
+from ccollab2eeplatform.filters.date_filter import DateFilter
 from ccollab2eeplatform.filters.product_filter import ProductFilter
 from ccollab2eeplatform.settings.eeplatform_settings import EEPlatformSettings
 from ccollab2eeplatform.settings.users_settings import UsersSettings
@@ -87,16 +88,13 @@ class RecordManager:
             data = []
             valid_records = self._get_valid_records()
             product_records = ProductFilter(valid_records, product).filter()
-            try:
-                count_by_month = {}
-                stat = RecordsStatistics(product_records)
-                for month, group in stat.groupby_review_creation_month:
-                    _stat = RecordsStatistics(list(group))
-                    count_by_month[month] = _stat.count
-            except AttributeError:
-                return 1
             for month in utils.month_range(self._start_date, self._end_date):
-                data.append([month, count_by_month.get(month, 0)])
+                month_records = DateFilter(product_records, month).filter()
+                try:
+                    stat = RecordsStatistics(month_records)
+                except AttributeError:
+                    return 1
+                data.append([month, stat.count])
             self._save(setting, schema, data)
 
         # Start to process for all products.
@@ -250,25 +248,22 @@ class RecordManager:
         2016-03  0.2
         2016-05  0.3
         """
-        name = 'inspection_rate_by_month_from_product'
-        def _process(product, setting):
+        def process_product(product, setting):
             schema = [('Month', 'string'), ('KLOCC/Hour', 'number')]
             data = []
             valid_records = self._get_valid_records()
             product_records = ProductFilter(valid_records, product).filter()
-            try:
-                stat_by_month = {}
-                stat = RecordsStatistics(product_records)
-                for month, group in stat.groupby_review_creation_month:
-                    _stat = RecordsStatistics(list(group))
-                    stat_by_month[month] = _stat.inspection_rate
-            except AttributeError:
-                return 1
             for month in utils.month_range(self._start_date, self._end_date):
-                data.append([month, stat_by_month.get(month, 0)])
+                month_records = DateFilter(product_records, month).filter()
+                try:
+                    stat = RecordsStatistics(month_records)
+                except AttributeError:
+                    return 1
+                data.append([month, stat.inspection_rate])
             self._save(setting, schema, data)
 
         # Start to process for all products.
+        name = 'inspection_rate_by_month_from_product'
         if self._settings.get(name):
             for product, setting in self._settings.get(name).items():
-                _process(product, setting)
+                process_product(product, setting)

@@ -19,6 +19,9 @@ class TestCreatorFilter(unittest.TestCase):
         self.records = [ReviewRecord(record) for record in self._records]
 
     def test_creator_filter(self):
+        creator_filter = CreatorFilter(self.records, '')
+        self.assertEqual(len(creator_filter.filter()), 7)
+
         creator_filter = CreatorFilter(self.records, 'pzhong')
         self.assertEqual(len(creator_filter.filter()), 4)
 
@@ -32,27 +35,13 @@ class TestCreatorFilter(unittest.TestCase):
                                        ['pzhong', 'lily', 'lucy'])
         self.assertEqual(len(creator_filter.filter()), 7)
 
-        # Keywords from `filter` parameter has a higher priority.
-        creator_filter = CreatorFilter(self.records,
-                                       ['pzhong', 'lily', 'lucy'])
-        self.assertEqual(len(creator_filter.filter(['pzhong'])), 4)
-
-        # It should return all records.
         creator_filter = CreatorFilter(self.records)
-        self.assertEqual(len(creator_filter.filter()), 7)
+        creator_filter.set_keywords('pzhong')
+        self.assertEqual(len(creator_filter.filter()), 4)
 
-        creator_filter = CreatorFilter(self.records)
-        self.assertEqual(len(creator_filter.filter('pzhong')), 4)
-
-        creator_filter = CreatorFilter(self.records)
-        self.assertEqual(len(creator_filter.filter(['pzhong'])), 4)
-
-        creator_filter = CreatorFilter(self.records)
-        self.assertEqual(len(creator_filter.filter(['pzhong', 'lucy'])), 6)
-
-        creator_filter = CreatorFilter(self.records)
-        self.assertEqual(
-            len(creator_filter.filter(['pzhong', 'lily', 'lucy'])), 7)
+        creator_filter = CreatorFilter(self.records, 'lily')
+        creator_filter.set_keywords('pzhong')
+        self.assertEqual(len(creator_filter.filter()), 4)
 
 
 if __name__ == '__main__':

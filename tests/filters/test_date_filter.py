@@ -24,10 +24,15 @@ class TestDateFilter(unittest.TestCase):
         date_filter = DateFilter(self.records)
         self.assertEqual(len(date_filter.filter()), 6)
 
+        date_filter = DateFilter(self.records, '')
+        self.assertEqual(len(date_filter.filter()), 6)
+
         date_filter = DateFilter(self.records, keywords='2018-12-30')
         self.assertEqual(len(date_filter.filter()), 0)
 
         date_filter = DateFilter(self.records, keywords='2016-12-30')
+        self.assertEqual(len(date_filter.filter()), 1)
+        date_filter = DateFilter(self.records, keywords='2016-12')
         self.assertEqual(len(date_filter.filter()), 1)
         date_filter = DateFilter(self.records, keywords='2016-12-30', rule='DAY')
         self.assertEqual(len(date_filter.filter()), 1)

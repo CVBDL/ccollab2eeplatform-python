@@ -29,7 +29,7 @@ class DateFilter:
 
     def set_keywords(self, keywords=None):
         """Setter for keywords."""
-        if keywords is None:
+        if not keywords:
             keywords = []
         if not isinstance(keywords, list):
             keywords = [keywords]

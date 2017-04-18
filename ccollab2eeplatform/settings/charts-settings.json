@@ -39,13 +39,13 @@
     },
     "inspection_rate_by_month_from_product": {
       "": {
-        "_id": "comment_density_changed_by_month_from_all"
+        "_id": "inspection_rate_by_month_from_product_from_all"
       },
       "ViewPoint": {
-        "_id": "comment_density_changed_by_month_from_ViewPoint"
+        "_id": "inspection_rate_by_month_from_product_from_ViewPoint"
       },
       "FTView": {
-        "_id": "comment_density_changed_by_month_from_FTView"
+        "_id": "inspection_rate_by_month_from_product_from_FTView"
       }
     }
   },
