@@ -1,4 +1,5 @@
 {
+  "products": [ "ViewPoint", "FTView", "FTAE" ],
   "review": {
     "count_by_month_from_product": {
       "": {

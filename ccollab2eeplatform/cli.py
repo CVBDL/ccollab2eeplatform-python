@@ -8,7 +8,7 @@ from ccollab2eeplatform.ccollab import review
 from ccollab2eeplatform.ccollab import defect
 from ccollab2eeplatform.log import logger
 from ccollab2eeplatform.manager import RecordManager
-from ccollab2eeplatform.settings.charts_settings import ChartsSettings
+from ccollab2eeplatform.settings import charts_settings
 
 
 def main():
@@ -66,7 +66,7 @@ def main():
     else:
         # Generate charts.
         review_manager = RecordManager(
-            review_records, ChartsSettings.get_settings('review'),
+            review_records, charts_settings.get_review_settings(),
             start_date, end_date)
         review_manager.process()
 
@@ -77,7 +77,7 @@ def main():
     else:
         # Generate charts.
         defect_manager = RecordManager(
-            defect_records, ChartsSettings.get_settings('defect'),
+            defect_records, charts_settings.get_defect_settings(),
             start_date, end_date)
         defect_manager.process()
 

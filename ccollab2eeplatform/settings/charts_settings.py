@@ -1,7 +1,10 @@
-"""Charts settings module."""
+"""Provide all charts related settings."""
 
 import json
 import os
+
+
+__all__ = ['list_products', 'get_review_settings', 'get_defect_settings']
 
 
 def read_config_file():
@@ -12,18 +15,19 @@ def read_config_file():
         return json.load(settings)
 
 
-class ChartsSettings:
-    """Class for accessing charts settings."""
+SETTINGS = read_config_file()
 
-    settings = read_config_file()
 
-    @classmethod
-    def get_settings(cls, key):
-        """Return a chart's settings by a key.
+def list_products():
+    """Return a list of product names."""
+    return SETTINGS.get('products', [])
 
-        Args:
-            key (str): The key for finding settings.
-        Returns:
-            A dict of settings or None if not found.
-        """
-        return cls.settings.get(key, None)
+
+def get_review_settings():
+    """Return a dict of review charts settings."""
+    return SETTINGS.get('review', None)
+
+
+def get_defect_settings():
+    """Return a dict of defect charts settings."""
+    return SETTINGS.get('defect', None)
