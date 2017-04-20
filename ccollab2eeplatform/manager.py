@@ -109,6 +109,8 @@ class RecordManager:
     def count_by_product(self):
         """Records count by product.
 
+        It'll generate a single chart.
+
         Data table:
         Product  Count
         Team1    20
@@ -131,6 +133,8 @@ class RecordManager:
     def comment_density_uploaded_by_product(self):
         """Comment density(uploaded) by product.
 
+        It'll generate a single chart.
+
         Data table:
         Product  Comments/KLOC
         Team1    0.1
@@ -152,6 +156,8 @@ class RecordManager:
 
     def comment_density_changed_by_product(self):
         """Comment density(changed) by product.
+
+        It'll generate a single chart.
 
         Data table:
         Product  Comments/KLOCC
@@ -205,6 +211,8 @@ class RecordManager:
     def defect_density_uploaded_by_product(self):
         """Defect density(uploaded) by product.
 
+        It'll generate a single chart.
+
         Data table:
         Product  Defects/KLOC
         Team1    0.1
@@ -226,6 +234,8 @@ class RecordManager:
 
     def defect_density_changed_by_product(self):
         """Defect density(changed) by product.
+
+        It'll generate a single chart.
 
         Data table:
         Product  Defects/KLOCC
