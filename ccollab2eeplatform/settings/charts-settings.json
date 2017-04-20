@@ -1,5 +1,11 @@
 {
   "products": [ "ViewPoint", "FTView", "FTAE" ],
+  "defect_injection_stage": [
+    "Not Evaluated",
+    "Requirements",
+    "High Level Design",
+    "Detailed Design"
+  ],
   "review": {
     "count_by_month_from_product": {
       "": {
@@ -64,6 +70,9 @@
     },
     "comment_density_uploaded_by_product": {
       "_id": "comment_density_uploaded_by_product"
+    },
+    "count_by_injection_stage": {
+      "_id": "count_by_injection_stage"
     }
   }
 }

@@ -41,7 +41,7 @@ class TestDefectRecord(unittest.TestCase):
         self.assertEqual('algorithm/logic', self.record.type_cvb)
 
     def test_injection_stage(self):
-        self.assertEqual('Not Evaluated', self.record.injection_stage)
+        self.assertEqual('not evaluated', self.record.injection_stage)
 
     def test_creator_product_name(self):
         self.assertEqual('ViewPoint', self.record.creator_product_name)

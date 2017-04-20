@@ -61,6 +61,9 @@
     <Compile Include="ccollab2eeplatform\filters\date_filter.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ccollab2eeplatform\filters\injection_stage_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ccollab2eeplatform\filters\product_filter.py">
       <SubType>Code</SubType>
     </Compile>
@@ -136,6 +139,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\filters\test_date_filter.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\filters\test_injection_stage_filter.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\filters\test_product_filter.py">

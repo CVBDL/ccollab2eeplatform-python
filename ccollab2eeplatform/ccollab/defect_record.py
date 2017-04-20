@@ -4,6 +4,12 @@ from ccollab2eeplatform.ccollab.record_field_index import DEFECT_FIELD_INDEX
 from ccollab2eeplatform.settings.users_settings import UsersSettings
 
 
+def lower(func):
+    def _lower(*args, **kwargs):
+        return str.lower(str.strip(func(*args, **kwargs)))
+    return _lower
+
+
 class DefectRecord():
     """Class for a defect record.
 
@@ -82,6 +88,7 @@ class DefectRecord():
         return self.record[DEFECT_FIELD_INDEX['type_cvb']]
 
     @property
+    @lower
     def injection_stage(self):
         """Injection state."""
         return self.record[DEFECT_FIELD_INDEX['injection_stage']]

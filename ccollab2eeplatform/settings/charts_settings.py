@@ -23,6 +23,11 @@ def list_products():
     return SETTINGS.get('products', [])
 
 
+def list_injection_stages():
+    """Return a list of injection stages."""
+    return SETTINGS.get('defect_injection_stage', [])
+
+
 def get_review_settings():
     """Return a dict of review charts settings."""
     return SETTINGS.get('review', None)

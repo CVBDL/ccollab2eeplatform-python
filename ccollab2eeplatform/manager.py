@@ -9,6 +9,7 @@ from ccollab2eeplatform import utils
 from ccollab2eeplatform.log import logger
 from ccollab2eeplatform.filters.creator_filter import CreatorFilter
 from ccollab2eeplatform.filters.date_filter import DateFilter
+from ccollab2eeplatform.filters.injection_stage_filter import InjectionStageFilter
 from ccollab2eeplatform.filters.product_filter import ProductFilter
 from ccollab2eeplatform.settings import charts_settings
 from ccollab2eeplatform.settings.eeplatform_settings import EEPlatformSettings
@@ -56,14 +57,15 @@ class RecordManager:
 
     def process(self):
         """Process all charts."""
-        self.count_by_month_from_product()
-        self.count_by_product()
-        self.comment_density_uploaded_by_product()
-        self.comment_density_changed_by_product()
-        self.defect_density_uploaded_by_product()
-        self.defect_density_changed_by_product()
-        self.comment_density_changed_by_month_from_product()
-        self.inspection_rate_by_month_from_product()
+        #self.count_by_month_from_product()
+        #self.count_by_product()
+        #self.comment_density_uploaded_by_product()
+        #self.comment_density_changed_by_product()
+        #self.defect_density_uploaded_by_product()
+        #self.defect_density_changed_by_product()
+        #self.comment_density_changed_by_month_from_product()
+        #self.inspection_rate_by_month_from_product()
+        self.count_by_injection_stage()
 
     def list_valid_records(self):
         """Return records which we should use to calculate statistics.
@@ -296,3 +298,31 @@ class RecordManager:
         if self._settings.get(name):
             for product, setting in self._settings.get(name).items():
                 process_product(product, setting)
+
+    def count_by_injection_stage(self):
+        """Records count by injection stage.
+
+        It'll generate a single chart.
+
+        Data table:
+        InjectionStage     Count
+        Not Evaluated      2
+        Requirements       0
+        High Level Design  4
+        Detailed Design    11
+        """
+        name = 'count_by_injection_stage'
+        schema = [('InjectionStage', 'string'), ('Count', 'number')]
+        data = []
+        valid_records = self.list_valid_records()
+        injection_stages = charts_settings.list_injection_stages()
+        for injection_stage in injection_stages:
+            try:
+                injection_stage_filter = InjectionStageFilter(valid_records,
+                                                              injection_stage)
+                stage_records = injection_stage_filter.filter()
+                stat = RecordsStatistics(stage_records)
+                data.append([injection_stage, stat.count])
+            except AttributeError:
+                return 1
+        self._save(self._settings.get(name), schema, data)
