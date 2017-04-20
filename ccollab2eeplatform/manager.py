@@ -83,7 +83,9 @@ class RecordManager:
         Data table:
         Month    Count
         2016-01  20
+        2016-02  0
         2016-03  10
+        2016-04  0
         2016-05  25
         """
         def process_product(product, setting):
@@ -112,9 +114,10 @@ class RecordManager:
         It'll generate a single chart.
 
         Data table:
-        Product  Count
-        Team1    20
-        Team2    16
+        Product   Count
+        ProductA  20
+        ProductB  0
+        ProductC  16
         """
         name = 'count_by_product'
         schema = [('Product', 'string'), ('Count', 'number')]
@@ -136,9 +139,10 @@ class RecordManager:
         It'll generate a single chart.
 
         Data table:
-        Product  Comments/KLOC
-        Team1    0.1
-        Team2    0.034
+        Product   Comments/KLOC
+        ProductA  0.1
+        ProductB  0.034
+        ProductC  0
         """
         name = 'comment_density_uploaded_by_product'
         schema = [('Product', 'string'), ('Comments/KLOC', 'number')]
@@ -160,9 +164,10 @@ class RecordManager:
         It'll generate a single chart.
 
         Data table:
-        Product  Comments/KLOCC
-        Team1    0.1
-        Team2    0.034
+        Product   Comments/KLOCC
+        ProductA  0.1
+        ProductB  0.034
+        ProductC  0
         """
         name = 'comment_density_changed_by_product'
         schema = [('Product', 'string'), ('Comments/KLOCC', 'number')]
@@ -184,9 +189,10 @@ class RecordManager:
         It may generate multiple charts.
 
         Data table:
-        Month    Comments/KLOCC
-        2016-01  0.1
-        2016-02  0.034
+        Month     Comments/KLOCC
+        ProductA  0.1
+        ProductB  0.034
+        ProductC  0
         """
         name = 'comment_density_changed_by_month_from_product'
         def process_product(product, setting):
@@ -214,9 +220,10 @@ class RecordManager:
         It'll generate a single chart.
 
         Data table:
-        Product  Defects/KLOC
-        Team1    0.1
-        Team2    0.034
+        Product   Defects/KLOC
+        ProductA  0.1
+        ProductB  0.034
+        ProductC  0
         """
         name = 'defect_density_uploaded_by_product'
         schema = [('Product', 'string'), ('Defects/KLOC', 'number')]
@@ -238,9 +245,10 @@ class RecordManager:
         It'll generate a single chart.
 
         Data table:
-        Product  Defects/KLOCC
-        Team1    0.1
-        Team2    0.034
+        Product   Defects/KLOCC
+        ProductA  0.1
+        ProductB  0.034
+        ProductC  0
         """
         name = 'defect_density_changed_by_product'
         schema = [('Product', 'string'), ('Defects/KLOCC', 'number')]
@@ -262,9 +270,11 @@ class RecordManager:
         It may generate multiple charts.
 
         Data table:
-        Month  KLOCC/Hour
+        Month    KLOCC/Hour
         2016-01  0.1
+        2016-02  0
         2016-03  0.2
+        2016-04  0
         2016-05  0.3
         """
         def process_product(product, setting):
