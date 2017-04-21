@@ -21,10 +21,19 @@ class TestInjectionStageFilter(unittest.TestCase):
         injection_stage_filter = InjectionStageFilter(self.records)
         self.assertEqual(len(injection_stage_filter.filter()), 5)
 
-        injection_stage_filter = InjectionStageFilter(self.records, '')
+        injection_stage_filter = InjectionStageFilter(self.records, None)
         self.assertEqual(len(injection_stage_filter.filter()), 5)
 
-        injection_stage_filter = InjectionStageFilter(self.records, 'Requirements')
+        injection_stage_filter = InjectionStageFilter(self.records, '')
+        self.assertEqual(len(injection_stage_filter.filter()), 0)
+
+        injection_stage_filter = InjectionStageFilter(self.records, 0)
+        self.assertEqual(len(injection_stage_filter.filter()), 0)
+
+        injection_stage_filter = InjectionStageFilter(self.records, {})
+        self.assertEqual(len(injection_stage_filter.filter()), 0)
+
+        injection_stage_filter = InjectionStageFilter(self.records, 'REQUIREMENTS')
         self.assertEqual(len(injection_stage_filter.filter()), 2)
 
         injection_stage_filter = InjectionStageFilter(self.records, 'requirements')

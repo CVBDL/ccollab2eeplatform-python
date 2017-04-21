@@ -57,14 +57,14 @@ class RecordManager:
 
     def process(self):
         """Process all charts."""
-        #self.count_by_month_from_product()
-        #self.count_by_product()
-        #self.comment_density_uploaded_by_product()
-        #self.comment_density_changed_by_product()
-        #self.defect_density_uploaded_by_product()
-        #self.defect_density_changed_by_product()
-        #self.comment_density_changed_by_month_from_product()
-        #self.inspection_rate_by_month_from_product()
+        self.count_by_month_from_product()
+        self.count_by_product()
+        self.comment_density_uploaded_by_product()
+        self.comment_density_changed_by_product()
+        self.defect_density_uploaded_by_product()
+        self.defect_density_changed_by_product()
+        self.comment_density_changed_by_month_from_product()
+        self.inspection_rate_by_month_from_product()
         self.count_by_injection_stage()
 
     def list_valid_records(self):
@@ -315,12 +315,16 @@ class RecordManager:
         schema = [('InjectionStage', 'string'), ('Count', 'number')]
         data = []
         valid_records = self.list_valid_records()
+        if valid_records is None:
+            return 1
         injection_stages = charts_settings.list_injection_stages()
         for injection_stage in injection_stages:
+            injection_stage_filter = InjectionStageFilter(valid_records,
+                                                          injection_stage)
+            stage_records = injection_stage_filter.filter()
+            if stage_records is None:
+                return 1
             try:
-                injection_stage_filter = InjectionStageFilter(valid_records,
-                                                              injection_stage)
-                stage_records = injection_stage_filter.filter()
                 stat = RecordsStatistics(stage_records)
                 data.append([injection_stage, stat.count])
             except AttributeError:

@@ -7,37 +7,44 @@ class InjectionStageFilter:
     """Filter records by its injection stage.
 
     Args:
-        records: A list of records, each record must have a
-                 "injection_stage" property.
-        keywords: A list of filter keywords.
+        records: A list of records to filter.
+        keywords: Filter keywords, multiple keywords should be in a list.
     Attributes:
-        records: Data source to filter.
-        keywords: Keywords of filter operation.
+        records: The list of records to filter.
+        keywords: Filter keywords list.
     Example:
         filter = InjectionStageFilter([Record], 'design')
         filter.filter()
-    """
+    """ 
 
     def __init__(self, records, keywords=None):
-        self.records = records
+        if isinstance(records, list):
+            self.records = records
+        else:
+            self.records = None
         self.set_keywords(keywords)
 
-    def set_keywords(self, keywords=None):
+    def set_keywords(self, keywords):
         """Setter for keywords."""
-        if not keywords:
-            keywords = []
-        if not isinstance(keywords, list):
-            keywords = [keywords]
-        self.keywords = [str.lower(str.strip(kw)) for kw in keywords]
+        if keywords is None:
+            self.keywords = None
+        else:
+            self.keywords = []
+            keywords = keywords if isinstance(keywords, list) else [keywords]
+            for kw in keywords:
+                if isinstance(kw, str):
+                    self.keywords.append(str.lower(str.strip(kw)))
+                else:
+                    self.keywords.append(kw)
 
     def filter(self):
         """Filter function."""
-        if not self.records:
+        if not self.records or not self.keywords:
             return self.records
-        if not self.keywords:
-            return self.records
-
-        result_iterator = filterfalse(
-            lambda record: not record.injection_stage in self.keywords,
-            self.records)
-        return list(result_iterator)
+        try:
+            result_iterator = filterfalse(
+                lambda record: not record.injection_stage in self.keywords,
+                self.records)
+            return list(result_iterator)
+        except AttributeError:
+            return None
