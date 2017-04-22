@@ -4,16 +4,19 @@ from itertools import filterfalse
 
 
 class InjectionStageFilter:
-    """Filter records by its injection stage.
+    """Filter records by "injection_stage" property.
 
     Args:
         records: A list of records to filter.
-        keywords: Filter keywords, multiple keywords should be in a list.
+        keywords: Filter keywords.
+                  For multiple keywords put them in a list.
     Attributes:
         records: The list of records to filter.
         keywords: Filter keywords list.
     Example:
-        filter = InjectionStageFilter([Record], 'design')
+        filter = InjectionStageFilter([Record], 'foo')
+        filter = InjectionStageFilter([Record], ['foo', 'bar'])
+        filter.set_keywords('foobar')
         filter.filter()
     """ 
 
@@ -38,7 +41,12 @@ class InjectionStageFilter:
                     self.keywords.append(kw)
 
     def filter(self):
-        """Filter function."""
+        """Filter function.
+        
+        Returns:
+            Filtered records list.  None if error occurred.
+            If keyword is None or empty list, then returns all records.
+        """
         if not self.records or not self.keywords:
             return self.records
         try:

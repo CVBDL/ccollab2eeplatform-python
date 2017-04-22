@@ -18,6 +18,9 @@ class TestInjectionStageFilter(unittest.TestCase):
         self.records = [DefectRecord(record) for record in self._records]
 
     def test_injection_stage_filter(self):
+        injection_stage_filter = InjectionStageFilter(None)
+        self.assertEqual(injection_stage_filter.filter(), None)
+
         injection_stage_filter = InjectionStageFilter(self.records)
         self.assertEqual(len(injection_stage_filter.filter()), 5)
 

@@ -94,13 +94,14 @@ class RecordManager:
             schema = [('Month', 'string'), ('Count', 'number')]
             data = []
             valid_records = self.list_valid_records()
+            product = None if product == '' else product
             product_records = ProductFilter(valid_records, product).filter()
             for month in utils.month_range(self._start_date, self._end_date):
                 month_records = DateFilter(product_records, month).filter()
                 try:
                     stat = RecordsStatistics(month_records)
                     data.append([month, stat.count])
-                except AttributeError:
+                except Exception:
                     return 1
             self._save(setting, schema, data)
 
@@ -131,7 +132,7 @@ class RecordManager:
             try:
                 stat = RecordsStatistics(product_records)
                 data.append([product, stat.count])
-            except AttributeError:
+            except Exception:
                 return 1
         self._save(self._settings.get(name), schema, data)
 
@@ -156,7 +157,7 @@ class RecordManager:
             try:
                 stat = RecordsStatistics(product_records)
                 data.append([product, stat.comment_density_uploaded])
-            except AttributeError:
+            except Exception:
                 return 1
         self._save(self._settings.get(name), schema, data)
 
@@ -181,7 +182,7 @@ class RecordManager:
             try:
                 stat = RecordsStatistics(product_records)
                 data.append([product, stat.comment_density_changed])
-            except AttributeError:
+            except Exception:
                 return 1
         self._save(self._settings.get(name), schema, data)
 
@@ -201,13 +202,14 @@ class RecordManager:
             schema = [('Month', 'string'), ('Comments/KLOCC', 'number')]
             data = []
             valid_records = self.list_valid_records()
+            product = None if product == '' else product
             product_records = ProductFilter(valid_records, product).filter()
             for month in utils.month_range(self._start_date, self._end_date):
                 month_records = DateFilter(product_records, month).filter()
                 try:
                     stat = RecordsStatistics(month_records)
                     data.append([month, stat.comment_density_changed])
-                except AttributeError:
+                except Exception:
                     return 1
             self._save(setting, schema, data)
 
@@ -237,7 +239,7 @@ class RecordManager:
             try:
                 stat = RecordsStatistics(product_records)
                 data.append([product, stat.defect_density_uploaded])
-            except AttributeError:
+            except Exception:
                 return 1
         self._save(self._settings.get(name), schema, data)
 
@@ -262,7 +264,7 @@ class RecordManager:
             try:
                 stat = RecordsStatistics(product_records)
                 data.append([product, stat.defect_density_changed])
-            except AttributeError:
+            except Exception:
                 return 1
         self._save(self._settings.get(name), schema, data)
 
@@ -283,13 +285,14 @@ class RecordManager:
             schema = [('Month', 'string'), ('KLOCC/Hour', 'number')]
             data = []
             valid_records = self.list_valid_records()
+            product = None if product == '' else product
             product_records = ProductFilter(valid_records, product).filter()
             for month in utils.month_range(self._start_date, self._end_date):
                 month_records = DateFilter(product_records, month).filter()
                 try:
                     stat = RecordsStatistics(month_records)
                     data.append([month, stat.inspection_rate])
-                except AttributeError:
+                except Exception:
                     return 1
             self._save(setting, schema, data)
 
@@ -315,18 +318,14 @@ class RecordManager:
         schema = [('InjectionStage', 'string'), ('Count', 'number')]
         data = []
         valid_records = self.list_valid_records()
-        if valid_records is None:
-            return 1
         injection_stages = charts_settings.list_injection_stages()
         for injection_stage in injection_stages:
-            injection_stage_filter = InjectionStageFilter(valid_records,
-                                                          injection_stage)
+            injection_stage_filter = InjectionStageFilter(
+                valid_records, injection_stage)
             stage_records = injection_stage_filter.filter()
-            if stage_records is None:
-                return 1
             try:
                 stat = RecordsStatistics(stage_records)
                 data.append([injection_stage, stat.count])
-            except AttributeError:
+            except Exception:
                 return 1
         self._save(self._settings.get(name), schema, data)

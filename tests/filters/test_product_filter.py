@@ -17,10 +17,13 @@ class TestProductFilter(unittest.TestCase):
         self.records = [ReviewRecord(record) for record in self._records]
 
     def test_product_filter(self):
+        product_filter = ProductFilter(None)
+        self.assertEqual(product_filter.filter(), None)
+
         product_filter = ProductFilter(self.records)
         self.assertEqual(len(product_filter.filter()), 5)
 
-        product_filter = ProductFilter(self.records, '')
+        product_filter = ProductFilter(self.records, None)
         self.assertEqual(len(product_filter.filter()), 5)
 
         product_filter = ProductFilter(self.records, 'ViewPoint')

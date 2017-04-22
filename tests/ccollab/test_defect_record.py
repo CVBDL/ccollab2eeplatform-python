@@ -32,10 +32,10 @@ class TestDefectRecord(unittest.TestCase):
         self.assertEqual('pzhong', self.record.creator_login)
 
     def test_creator_full_name(self):
-        self.assertEqual('Patrick Zhong', self.record.creator_full_name)
+        self.assertEqual('patrick zhong', self.record.creator_full_name)
 
     def test_severity(self):
-        self.assertEqual('Major', self.record.severity)
+        self.assertEqual('major', self.record.severity)
 
     def test_type_cvb(self):
         self.assertEqual('algorithm/logic', self.record.type_cvb)
@@ -44,7 +44,7 @@ class TestDefectRecord(unittest.TestCase):
         self.assertEqual('not evaluated', self.record.injection_stage)
 
     def test_creator_product_name(self):
-        self.assertEqual('ViewPoint', self.record.creator_product_name)
+        self.assertEqual('viewpoint', self.record.creator_product_name)
 
     def test_review_creation_year(self):
         self.assertEqual('2016', self.record.review_creation_year)

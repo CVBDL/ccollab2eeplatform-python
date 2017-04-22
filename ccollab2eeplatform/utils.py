@@ -78,3 +78,9 @@ def groupby(iterable, key=None, reverse=False):
     if key is None:
         key = lambda x: x
     return groupby_(sorted(iterable, key=key, reverse=reverse), key)
+
+
+def lower(func):
+    def _lower(*args, **kwargs):
+        return str.lower(str.strip(func(*args, **kwargs)))
+    return _lower

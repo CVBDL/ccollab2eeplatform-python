@@ -1,5 +1,6 @@
 """Define a review record."""
 
+from ccollab2eeplatform import utils
 from ccollab2eeplatform.ccollab.record_field_index import REVIEW_FIELD_INDEX
 from ccollab2eeplatform.settings.users_settings import UsersSettings
 
@@ -56,16 +57,19 @@ class ReviewRecord():
         return (self.review_creation_date)[0:10]
 
     @property
+    @utils.lower
     def creator_login(self):
         """Creator login name."""
         return self.record[REVIEW_FIELD_INDEX['creator_login']]
 
     @property
+    @utils.lower
     def creator_full_name(self):
         """Creator full name."""
         return self.record[REVIEW_FIELD_INDEX['creator_full_name']]
 
     @property
+    @utils.lower
     def creator_product_name(self):
         """Creator product name.
 

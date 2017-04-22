@@ -19,12 +19,12 @@ class TestDateFilter(unittest.TestCase):
 
     def test_creator_filter(self):
         date_filter = DateFilter(None)
-        self.assertEqual(date_filter.filter(), [])
+        self.assertEqual(date_filter.filter(), None)
 
         date_filter = DateFilter(self.records)
         self.assertEqual(len(date_filter.filter()), 6)
 
-        date_filter = DateFilter(self.records, '')
+        date_filter = DateFilter(self.records, None)
         self.assertEqual(len(date_filter.filter()), 6)
 
         date_filter = DateFilter(self.records, keywords='2018-12-30')

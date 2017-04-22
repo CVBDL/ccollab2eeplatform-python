@@ -41,7 +41,7 @@ class TestReviewRecord(unittest.TestCase):
         self.assertEqual('pzhong', self.record.creator_login)
 
     def test_creator_full_name(self):
-        self.assertEqual('Patrick Zhong', self.record.creator_full_name)
+        self.assertEqual('patrick zhong', self.record.creator_full_name)
 
     def test_defect_count(self):
         self.assertEqual(0, self.record.defect_count)
@@ -65,7 +65,7 @@ class TestReviewRecord(unittest.TestCase):
                          self.record_1.total_person_time_in_second)
 
     def test_creator_product_name(self):
-        self.assertEqual('ViewPoint', self.record.creator_product_name)
+        self.assertEqual('viewpoint', self.record.creator_product_name)
 
     def test_review_creation_year(self):
         self.assertEqual('2016', self.record.review_creation_year)

@@ -1,13 +1,8 @@
 """Define a defect record."""
 
+from ccollab2eeplatform import utils
 from ccollab2eeplatform.ccollab.record_field_index import DEFECT_FIELD_INDEX
 from ccollab2eeplatform.settings.users_settings import UsersSettings
-
-
-def lower(func):
-    def _lower(*args, **kwargs):
-        return str.lower(str.strip(func(*args, **kwargs)))
-    return _lower
 
 
 class DefectRecord():
@@ -59,16 +54,19 @@ class DefectRecord():
 
 
     @property
+    @utils.lower
     def creator_login(self):
         """Creator login name."""
         return self.record[DEFECT_FIELD_INDEX['creator_login']]
 
     @property
+    @utils.lower
     def creator_full_name(self):
         """Creator full name."""
         return self.record[DEFECT_FIELD_INDEX['creator_full_name']]
 
     @property
+    @utils.lower
     def creator_product_name(self):
         """Creator product name.
 
@@ -78,17 +76,19 @@ class DefectRecord():
         return UsersSettings.get_product_by_login(self.creator_login)
 
     @property
+    @utils.lower
     def severity(self):
         """Severity."""
         return self.record[DEFECT_FIELD_INDEX['severity']]
 
     @property
+    @utils.lower
     def type_cvb(self):
         """Type CVB."""
         return self.record[DEFECT_FIELD_INDEX['type_cvb']]
 
     @property
-    @lower
+    @utils.lower
     def injection_stage(self):
         """Injection state."""
         return self.record[DEFECT_FIELD_INDEX['injection_stage']]

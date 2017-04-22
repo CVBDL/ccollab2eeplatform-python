@@ -19,16 +19,28 @@ class TestCreatorFilter(unittest.TestCase):
         self.records = [ReviewRecord(record) for record in self._records]
 
     def test_creator_filter(self):
-        creator_filter = CreatorFilter(self.records, '')
+        creator_filter = CreatorFilter(None)
+        self.assertEqual(creator_filter.filter(), None)
+
+        creator_filter = CreatorFilter(self.records)
         self.assertEqual(len(creator_filter.filter()), 7)
 
+        creator_filter = CreatorFilter(self.records, None)
+        self.assertEqual(len(creator_filter.filter()), 7)
+
+        creator_filter = CreatorFilter(self.records, '')
+        self.assertEqual(len(creator_filter.filter()), 0)
+
         creator_filter = CreatorFilter(self.records, 'pzhong')
+        self.assertEqual(len(creator_filter.filter()), 4)
+
+        creator_filter = CreatorFilter(self.records, 'PZHONG')
         self.assertEqual(len(creator_filter.filter()), 4)
 
         creator_filter = CreatorFilter(self.records, ['pzhong'])
         self.assertEqual(len(creator_filter.filter()), 4)
 
-        creator_filter = CreatorFilter(self.records, ['pzhong', 'lily'])
+        creator_filter = CreatorFilter(self.records, ['pzhong', 'LILY'])
         self.assertEqual(len(creator_filter.filter()), 5)
 
         creator_filter = CreatorFilter(self.records,

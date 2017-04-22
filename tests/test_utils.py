@@ -91,6 +91,12 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(list(reversed(['i', 'o', 'u'])), uniquekeys)
         self.assertEqual(list(reversed(['lily', 'rose', 'lucy'])), groups)
 
+    def test_lower(self):
+        @utils.lower
+        def return_FOO():
+            return 'FOO'
+        self.assertEqual('foo', return_FOO())
+
 
 if __name__ == '__main__':
     unittest.main()

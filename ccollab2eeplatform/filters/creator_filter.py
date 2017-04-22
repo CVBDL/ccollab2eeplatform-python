@@ -1,47 +1,58 @@
-"""Records filter."""
+"""Creator filter."""
 
 from itertools import filterfalse
 
 
 class CreatorFilter:
-    """Filter records by its creator.
+    """Filter records by "creator_login" property.
 
     Args:
-        records: A list of records, each record must have a
-                 "creator_login" property.
-        keywords: A list of filter keywords.
+        records: A list of records to filter.
+        keywords: Filter keywords.
+                  For multiple keywords put them in a list.
     Attributes:
-        records: Data source to filter.
-        keywords: Keywords of filter operation.
+        records: The list of records to filter.
+        keywords: Filter keywords list.
     Example:
-        filter = CreatorFilter([Record(creator_login='foo')], ['foo'])
+        filter = CreatorFilter([Record], 'foo')
+        filter = CreatorFilter([Record], ['foo', 'bar'])
+        filter.set_keywords('foobar')
         filter.filter()
     """
 
     def __init__(self, records, keywords=None):
-        self.records = records
+        if isinstance(records, list):
+            self.records = records
+        else:
+            self.records = None
         self.set_keywords(keywords)
 
     def set_keywords(self, keywords=None):
         """Setter for keywords."""
-        if not keywords:
-            keywords = []
-        if not isinstance(keywords, list):
-            keywords = [keywords]
-        self.keywords = keywords
+        if keywords is None:
+            self.keywords = None
+        else:
+            self.keywords = []
+            keywords = keywords if isinstance(keywords, list) else [keywords]
+            for kw in keywords:
+                if isinstance(kw, str):
+                    self.keywords.append(str.lower(str.strip(kw)))
+                else:
+                    self.keywords.append(kw)
 
     def filter(self):
         """Filter function.
 
-        Todo:
-            Cache the result.
+        Returns:
+            Filtered records list.  None if error occurred.
+            If keyword is None or empty list, then returns all records.
         """
-        if not self.records:
+        if not self.records or not self.keywords:
             return self.records
-        if not self.keywords:
-            return self.records
-
-        result_iterator = filterfalse(
-            lambda record: not record.creator_login in self.keywords,
-            self.records)
-        return list(result_iterator)
+        try:
+            result_iterator = filterfalse(
+                lambda record: not record.creator_login in self.keywords,
+                self.records)
+            return list(result_iterator)
+        except AttributeError:
+            return None
