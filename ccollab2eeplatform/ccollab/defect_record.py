@@ -2,7 +2,7 @@
 
 from ccollab2eeplatform import utils
 from ccollab2eeplatform.ccollab.record_field_index import DEFECT_FIELD_INDEX
-from ccollab2eeplatform.settings.users_settings import UsersSettings
+from ccollab2eeplatform.settings import users_settings
 
 
 class DefectRecord():
@@ -73,7 +73,7 @@ class DefectRecord():
         Returns:
             str: Product name like "ViewPoint".
         """
-        return UsersSettings.get_product_by_login(self.creator_login)
+        return users_settings.get_product_by_login(self.creator_login)
 
     @property
     @utils.lower

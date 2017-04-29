@@ -12,8 +12,8 @@ from ccollab2eeplatform.filters.date_filter import DateFilter
 from ccollab2eeplatform.filters.injection_stage_filter import InjectionStageFilter
 from ccollab2eeplatform.filters.product_filter import ProductFilter
 from ccollab2eeplatform.settings import charts_settings
-from ccollab2eeplatform.settings.eeplatform_settings import EEPlatformSettings
-from ccollab2eeplatform.settings.users_settings import UsersSettings
+from ccollab2eeplatform.settings import eeplatform_settings
+from ccollab2eeplatform.settings import users_settings
 from ccollab2eeplatform.statistics.records_statistics import RecordsStatistics
 
 
@@ -38,7 +38,7 @@ class RecordManager:
         """Return an EagleEye Platform API client instance."""
         if not self._client:
             self._client = EagleEyePlatformClient(
-                EEPlatformSettings.get_api_root_endpoint()
+                eeplatform_settings.get_api_root_endpoint()
             )
         return self._client
 
@@ -74,7 +74,7 @@ class RecordManager:
         file is considered to be valid.
         """
         creator_filter = CreatorFilter(self._records,
-                                       UsersSettings.list_login_names())
+                                       users_settings.list_login_names())
         return creator_filter.filter()
 
     def count_by_month_from_product(self):

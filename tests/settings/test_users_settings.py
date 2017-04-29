@@ -1,12 +1,12 @@
 import unittest
 
-from ccollab2eeplatform.settings.users_settings import UsersSettings
+from ccollab2eeplatform.settings import users_settings
 
 
 class TestUsersSettings(unittest.TestCase):
 
     def setUp(self):
-        UsersSettings.users = [
+        users_settings._users = [
             {
                 "login_name": "pzhong",
                 "full_name": "Patrick Zhong",
@@ -21,17 +21,17 @@ class TestUsersSettings(unittest.TestCase):
 
     def test_list_login_names(self):
         self.assertEqual(
-            UsersSettings.list_login_names(),
+            users_settings.list_login_names(),
             ['pzhong', 'yyyang']
         )
 
     def test_get_product_by_login(self):
         self.assertEqual(
-            UsersSettings.get_product_by_login('pzhong'),
+            users_settings.get_product_by_login('pzhong'),
             'ViewPoint'
         )
         self.assertEqual(
-            UsersSettings.get_product_by_login('yyyang'),
+            users_settings.get_product_by_login('yyyang'),
             'FTView'
         )
 
